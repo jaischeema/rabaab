@@ -1,22 +1,61 @@
-<!doctype>
-<html ng-app>
+<!doctype html>
+<html ng-app="perann">
   <head>
-    <title>Angular App</title>
-    <meta charset="utf-8">
-    <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/flatly/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/app.css">
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Perann</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular.min.js"></script>
     <script src="/application.js"></script>
   </head>
   <body>
-    <div class="container" ng-controller="PhoneListCtrl">
-      <ul>
-        <li ng-repeat="phone in phones">
-          <span>{{phone.name}}</span>
-          <p>{{phone.snippet}}</p>
-        </li>
-      </ul>
-      <p>Total number of phones: 2</p>
+
+    <div id="search-form" class="navbar navbar-fixed-top">
+      <div class="container">
+        <div class="input-group">
+        <input type="text" class="form-control input-lg" id="search-field" placeholder="search for song, artist or album">
+        <span class="input-group-btn">
+          <button class="btn btn-danger btn-lg" id="search-button" type="button">search</button>
+        </span>
+      </div><!-- /input-group -->
+      </div>
+    </div>
+    <div class="container" ng-controller="MainCtrl">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="title">Latest Albums</h1>
+          <div class="list-group">
+            <album ng-repeat="album in latest_albums"></album>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar navbar-fixed-bottom navbar-inverse" id="player-controls" role="player_controls">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2" id="player-buttons">
+            <div class="row">
+              <div class="col-lg-3"><a><span class="glyphicon glyphicon-backward"></a></div>
+              <div class="col-lg-3"><a><span class="glyphicon glyphicon-play"></a></div>
+              <div class="col-lg-3"><a><span class="glyphicon glyphicon-forward"></a></div>
+            </div>
+          </div>
+          <div class="col-lg-9" id="player-progress">
+            <div class="row">
+              <span class="col-lg-1 timing" id="left-time">0:00</span>
+              <span class="col-lg-10" id="title"></span>
+              <span class="col-lg-1 timing" id="total-time">0:00</span>
+            </div>
+            <div class="progress progress-striped active">
+              <div class="progress-bar progress-bar-info" style="width: 0%"></div>
+              <div class="progress-bar progress-bar-danger" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
