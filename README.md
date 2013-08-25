@@ -1,4 +1,4 @@
-Try Angular.js
-==============
+Angular Music Player
+====================
 
-* Use Livereload and moongoose for easy setup
+* A music player based on angular.js with coffeescript and sass.
