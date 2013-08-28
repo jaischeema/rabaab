@@ -1,0 +1,146 @@
+body {
+  padding-bottom: 120px;
+  padding-top: 80px;
+}
+
+html, body, #main-content, #main-content .row, #albums, #latest-albums {
+  height: 100%;
+}
+
+.scroller {
+  height: 90%;
+  overflow-y: scroll;
+}
+
+.navbar {
+  background-color: #fff;
+}
+
+.navbar.navbar-fixed-bottom {
+  background-color: #2c3e50;
+  min-height: 120px;
+}
+
+.container {
+  max-width: 100%;
+}
+
+#player-controls #player-buttons {
+  text-align: center;
+}
+#player-controls #player-buttons a {
+  display: block;
+  padding-top: 32px;
+  font-size: 42px;
+  color: white;
+  text-decoration: none;
+}
+#player-controls #player-buttons a#play-button {
+  font-size: 72px;
+  padding-top: 10px;
+}
+#player-controls #player-buttons a#next-button {
+  margin-left: -25px;
+}
+#player-controls #player-buttons a.disabled {
+  color: #ccc;
+  pointer-events: none;
+  cursor: default;
+}
+#player-controls #player-progress {
+  margin-top: 5px;
+}
+#player-controls #player-progress .timing {
+  font-weight: 100;
+  font-size: 42px;
+  color: white;
+}
+#player-controls #player-progress .timing#total-time {
+  text-align: right;
+}
+#player-controls #player-progress #title {
+  text-align: center;
+  font-weight: 400;
+  color: white;
+  font-size: 28px;
+  padding-top: 8px;
+}
+#player-controls #player-progress #title span.artist-title {
+  font-weight: 100;
+  color: #eee;
+}
+
+.input-group .form-control {
+  width: 99%;
+}
+
+#search-field {
+  border-radius: 0px;
+  font-size: 38px;
+  font-weight: 200;
+  border: 0px;
+  height: 75px;
+  padding-left: 10px;
+  margin-right: 10px;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 0 0;
+}
+#search-field:focus {
+  border-color: #777;
+  outline: 0;
+  -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 0px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 0px rgba(102, 175, 233, 0.6);
+}
+
+#search-button {
+  padding: 15px 20px;
+  border-radius: 2px;
+  font-weight: 700;
+  margin-top: 7px;
+  text-transform: uppercase;
+}
+
+h1.title {
+  padding-left: 10px;
+  font-weight: 200;
+}
+
+a small.muted {
+  color: #888;
+}
+
+.album-list {
+  list-style: none;
+  padding-left: 12px;
+}
+
+.album-cell {
+  display: block;
+  padding: 10px 0;
+  font-weight: 200;
+  font-size: 18px;
+}
+.album-cell a {
+  color: #444;
+}
+.album-cell a small {
+  color: #999;
+}
+
+.song-list {
+  list-style: none;
+  padding-left: 12px;
+}
+
+.song-cell {
+  display: block;
+  padding: 10px 0;
+  font-weight: 200;
+  font-size: 18px;
+}
+.song-cell a {
+  color: #444;
+}
+.song-cell a small {
+  color: #999;
+}

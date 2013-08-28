@@ -1,0 +1,16 @@
+---
+title: Home Page
+---
+
+<div class="container" ng-controller="MainCtrl" id="main-content">
+  <div class="row">
+    <div class='col-lg-3' id="latest-albums">
+      <h1 class="title">Latest Albums</h1>
+      <ul class="album-list scroller" album-list albums="latest_albums" on-album-select="showAlbum(album)"></ul>
+    </div>
+    <div class='col-lg-9 scroller' ng-show="showingAlbum" id="albums">
+      <h1 class="title">{{currentAlbum.title}} <small>by {{currentAlbum.artist.title}}</small></h1>
+      <ul class="song-list scroller" song-list songs="currentAlbum.songs" on-song-select="playSong(song)"></ul>
+    </div>
+  </div>
+</div>
