@@ -3,6 +3,17 @@ body {
   padding-top: 80px;
 }
 
+html,body, #main-content, #main-content .row, #albums, #latest-albums
+{
+  height: 100%;
+}
+
+.scroller
+{
+  height: 90%;
+  overflow-y:scroll;
+}
+
 .navbar {
   background-color: #fff;
 }
@@ -122,6 +133,26 @@ a small.muted {
 }
 
 .album-cell {
+  display: block;
+  padding: 10px 0;
+  font-weight: 200;
+  font-size: 18px;
+
+  a {
+    color: #444;
+    small
+    {
+      color: #999;
+    }
+  }
+}
+
+.song-list {
+  list-style: none;
+  padding-left: 12px;
+}
+
+.song-cell {
   display: block;
   padding: 10px 0;
   font-weight: 200;

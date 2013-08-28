@@ -5,16 +5,17 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Perann</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css" >
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/vendor/nprogress.css">
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular.min.js"></script>
     <script src="/js/vendor/nprogress.js"></script>
+    <script src="/js/vendor/soundmanager/soundmanager2.js"></script>
     <script src="/js/application.js"></script>
   </head>
   <body>
-
     <div id="search-form" class="navbar navbar-fixed-top">
       <div class="container">
         <div class="input-group">
@@ -25,15 +26,15 @@
       </div><!-- /input-group -->
       </div>
     </div>
-    <div class="container" ng-controller="MainCtrl">
+    <div class="container" ng-controller="MainCtrl" id="main-content">
       <div class="row">
-        <div class='col-lg-3'>
+        <div class='col-lg-3' id="latest-albums">
           <h1 class="title">Latest Albums</h1>
-          <ul class="album-list" album-list albums="latest_albums" on-album-select="showAlbum(album)"></ul>
+          <ul class="album-list scroller" album-list albums="latest_albums" on-album-select="showAlbum(album)"></ul>
         </div>
-        <div class='col-lg-9' ng-show="showingAlbum">
+        <div class='col-lg-9 scroller' ng-show="showingAlbum" id="albums">
           <h1 class="title">{{currentAlbum.title}} <small>by {{currentAlbum.artist.title}}</small></h1>
-          <ul class="song-list" song-list songs="currentAlbum.songs" on-song-select="console.log(song)"></ul>
+          <ul class="song-list scroller" song-list songs="currentAlbum.songs" on-song-select="playSong(song)"></ul>
         </div>
       </div>
     </div>
@@ -63,4 +64,19 @@
       </div>
     </div>
   </body>
+
+  <script type="text/ng-template" id="album-list">
+    <li class="album-cell" ng-repeat="album in albums">
+      <a href="#" ng-click="onAlbumSelect({album: album})">
+        {{album.title}} <small>by {{album.artist_title}}</small>
+      <a/>
+    </li>
+  </script>
+  <script type="text/ng-template" id="song-list">
+    <li class="song-cell" ng-repeat="song in songs">
+      <a href="#" ng-click="onSongSelect({song: song})">
+        {{song.title}} <small>- {{song.artist_title}}</small>
+      <a/>
+    </li>
+  </script>
 </html>
