@@ -115,3 +115,23 @@ h1.title {
 a small.muted {
   color: #888;
 }
+
+.album-list {
+  list-style: none;
+  padding-left: 12px;
+}
+
+.album-cell {
+  display: block;
+  padding: 10px 0;
+  font-weight: 200;
+  font-size: 18px;
+
+  a {
+    color: #444;
+    small
+    {
+      color: #999;
+    }
+  }
+}
