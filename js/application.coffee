@@ -8,14 +8,19 @@ app.factory 'dataFactory', [ '$http', ($http) ->
   }
 ]
 
-app.directive 'albumCell', ['dataFactory', (dataFactory) ->
+app.directive 'albumList', ->
   restrict: 'A'
-  template: '{{album.title}} <small>{{album.artist_title}}</small>'
-  controller: ($scope) ->
-    $scope.showAlbum = ->
-      dataFactory.getAlbum($scope.album.id).success (album_data) ->
-        console.log album_data
-]
+  scope:
+    albums: "="
+    onAlbumSelect: "&"
+  template: '<li class="album-cell" ng-repeat="album in albums"><a href="#" ng-click="onAlbumSelect({album: album})">{{album.title}} <small>by {{album.artist_title}}</small><a/></li>'
+
+app.directive 'songList', ->
+  restrict: 'A'
+  scope:
+    songs: "="
+    onSongSelect: "&"
+  template: '<li class="song-cell" ng-repeat="song in songs"><a href="#" ng-click="onSongSelect({song: song})">{{song.title}} <small>- {{song.artist_title}}</small><a/></li>'
 
 app.directive 'album', ->
   restrit: 'A'
@@ -26,9 +31,22 @@ app.directive 'album', ->
 
 app.controller "MainCtrl", ['$scope', 'dataFactory', ($scope, dataFactory) ->
   $scope.latest_albums = []
-  $scope.showingAlbum = false
+  $scope.showingAlbum = true
+  $scope.currentAlbum = null
   getLatestAlbums = ->
     dataFactory.getLatestAlbums().success (albums) ->
       $scope.latest_albums = albums.albums
+
+  $scope.showAlbum = (album) ->
+    dataFactory.getAlbum(album.id).success (album_data) ->
+      $scope.currentAlbum = album_data
+
+  $scope.$watch 'currentAlbum', ->
+    if $scope.currentAlbum == null
+      $scope.showingAlbum = false
+    else
+      $scope.showingAlbum = true
+      console.log $scope.currentAlbum
+
   getLatestAlbums()
 ]
