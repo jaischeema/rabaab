@@ -28,58 +28,56 @@ html,body, #main-content, #main-content .row, #albums, #latest-albums
   max-width: 100%;
 }
 
-#player-controls {
 
-  #player-buttons {
-    text-align: center;
-    a {
-      display: block;
-      padding-top: 32px;
-      font-size: 42px;
-      color: white;
-      text-decoration: none;
+#player-buttons {
+  text-align: center;
+  a {
+    display: block;
+    padding-top: 32px;
+    font-size: 42px;
+    color: white;
+    text-decoration: none;
 
-      &#play-button {
-        font-size: 72px;
-        padding-top: 10px;
-      }
+    &#play-button {
+      font-size: 72px;
+      padding-top: 10px;
+    }
 
-      &#next-button {
-        margin-left: -25px;
-      }
+    &#next-button {
+      margin-left: -25px;
+    }
 
-      &.disabled {
-        color: #ccc;
-        pointer-events: none;
-        cursor: default;
-      }
+    &.disabled {
+      color: #ccc;
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+}
+
+#player-progress {
+  margin-top: 5px;
+
+  .timing {
+    font-weight: 100;
+    font-size: 42px;
+    color: white;
+
+    &#total-time {
+      text-align: right;
     }
   }
 
-  #player-progress {
-    margin-top: 5px;
+  #title {
+    text-align: center;
+    font-weight: 400;
+    color: white;
+    font-size: 28px;
+    padding-top: 8px;
 
-    .timing {
+    span.artist-title {
       font-weight: 100;
-      font-size: 42px;
-      color: white;
-
-      &#total-time {
-        text-align: right;
-      }
-    }
-
-    #title {
-      text-align: center;
-      font-weight: 400;
-      color: white;
-      font-size: 28px;
-      padding-top: 8px;
-
-      span.artist-title {
-        font-weight: 100;
-        color: #eee;
-      }
+      color: #eee;
     }
   }
 }
