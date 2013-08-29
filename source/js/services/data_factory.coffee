@@ -11,6 +11,6 @@ app.factory 'dataFactory', [ '$http', ($http) ->
     return {
       getLatestAlbums: -> $http.get("/test/latest_albums.json")
       getAlbum: (id) -> $http.get("/test/album.json")
-      getSong: (id) -> $http.get("/test/track.json")
+      getSong: (id) -> $http.get("/test/track-#{id}.json")
     }
 ]
