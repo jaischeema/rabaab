@@ -9,8 +9,7 @@ set :images_dir, 'images'
 set :haml, :format => :html5
 
 configure :build do
-  ignore 'javascripts/lib/*'
-  ignore 'javascripts/vendor/*'
+  ignore 'js/vendor/*'
 
   activate :minify_css
   activate :minify_javascript
@@ -24,4 +23,3 @@ activate :deploy do |deploy|
   deploy.path         = "/var/www/perann"
   deploy.clean        = true
 end
-
