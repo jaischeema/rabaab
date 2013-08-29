@@ -1,4 +1,3 @@
-//= require './vendor/buzz.js'
 //= require './vendor/nprogress'
 //= require 'initialize'
 //= require_tree './controllers'

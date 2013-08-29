@@ -1,4 +1,4 @@
-app.controller "MainCtrl", ['$scope', 'dataFactory', 'player', ($scope, dataFactory, player) ->
+app.controller "MainCtrl", ['$scope', 'dataFactory', 'musicManager', ($scope, dataFactory, musicManager) ->
   $scope.latest_albums = []
   $scope.showingAlbum = true
   $scope.currentAlbum = null
@@ -13,7 +13,7 @@ app.controller "MainCtrl", ['$scope', 'dataFactory', 'player', ($scope, dataFact
 
   $scope.playSong = (song) ->
     dataFactory.getSong(song.id).success (song_data) ->
-      player.play(song_data.id, song_data.low_quality)
+      musicManager.enqueue(song_data)
 
   $scope.$watch 'currentAlbum', ->
     if $scope.currentAlbum == null
