@@ -12,19 +12,22 @@ class MusicManager
       onready: => @changeState(MusicManagerState.waiting)
 
   createSong: (id, url) ->
+    self = this
     @currentSound = soundManager.createSound
       id: "sound-#{id}"
       url: url,
       autoLoad: true,
       autoPlay: true,
-      onload: => @changeState(MusicManagerState.playing)
+      onload: -> self.changeState(MusicManagerState.playing)
+      whileplaying: -> self.safeApply => self.$scope.$broadcast('playPositionChanged', this.position, this.duration)
+      whileloading: -> self.safeApply => self.$scope.$broadcast('loadPositionChanged', this.bytesLoaded, this.bytesTotal)
       volume: @volume
 
   currentState: -> @state
 
   changeState: (state) ->
     @state = state
-    @$scope.$broadcast('stateChanged', state)
+    @safeApply => @$scope.$broadcast('stateChanged', state)
 
   enqueue: (song) ->
     song_id = "song-#{song.id}"
@@ -41,6 +44,7 @@ class MusicManager
   togglePlayPause: ->
     if @state == MusicManagerState.paused
       @play()
+
     else if @state == MusicManagerState.playing
       @pause()
 
@@ -71,6 +75,10 @@ class MusicManager
 
   isInPlayableState: -> @state == MusicManagerState.playing or @state == MusicManagerState.paused
 
+  currentSong: ->
+    song_id = @playlistIds[@currentIndex]
+    @playlist[song_id]
+
   songURL: (index) ->
     song_id = @playlistIds[index]
     @playlist[song_id].low_quality
@@ -78,5 +86,12 @@ class MusicManager
   playSongAtCurrentIndex: ->
     @currentSound.destruct()
     @createSong(@playlistIds[@currentIndex], @songURL(@currentIndex))
+
+  safeApply: (fn) ->
+    phase = @$scope.$root.$$phase
+    if phase == '$apply' || phase == '$digest'
+      @$scope.$eval(fn)
+    else
+      @$scope.$apply(fn)
 
 app.factory 'musicManager', ($rootScope) -> new MusicManager($rootScope)
