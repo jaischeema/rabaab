@@ -1,4 +1,4 @@
-app.controller "MainCtrl", ['$scope', 'dataFactory', 'musicManager', ($scope, dataFactory, musicManager) ->
+app.controller "LatestAlbumsCtrl", ['$scope', 'dataFactory', 'musicManager', ($scope, dataFactory, musicManager) ->
   $scope.latest_albums = []
   $scope.showingAlbum = true
   $scope.currentAlbum = null
