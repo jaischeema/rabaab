@@ -13,7 +13,8 @@ app.controller "MainCtrl", ['$scope', 'dataFactory', 'musicManager', ($scope, da
 
   $scope.playSong = (song) ->
     dataFactory.getSong(song.id).success (song_data) ->
-      musicManager.enqueue(song_data)
+      playlist_song = {id: song.id, title: song.title, artist_title: song.artist_title, album_title: $scope.currentAlbum.title, url: song_data.low_quality}
+      musicManager.enqueue(playlist_song)
 
   $scope.$watch 'currentAlbum', ->
     if $scope.currentAlbum == null

@@ -4,14 +4,14 @@
       <div class="col-lg-2" id="player-buttons">
         <div class="row">
           <div class="col-lg-3"><span ng-click="previous()" class="glyphicon glyphicon-backward"></div>
-          <div class="col-lg-3"><span id="play-button" ng-click="play()" class="glyphicon glyphicon-play"></div>
+          <div class="col-lg-3"><span id="play-button" ng-click="play()" ng-class="{true: 'glyphicon glyphicon-pause', false: 'glyphicon glyphicon-play'}[playing]"></div>
           <div class="col-lg-3"><span id="next-button" ng-click="next()" class="glyphicon glyphicon-forward"></div>
         </div>
       </div>
       <div class="col-lg-9" id="player-progress">
         <div class="row">
           <span class="col-lg-1 timing" id="left-time">{{position | time}}</span>
-          <span class="col-lg-10" id="title">{{title}} {{artistTitle}}</span>
+          <span class="col-lg-10" id="title">{{title}} <span class="artist-title">{{artistTitle}}</span></span>
           <span class="col-lg-1 timing" id="total-time">{{duration | time}}</span>
         </div>
         <div class="progress progress-striped active">

@@ -20,8 +20,8 @@ app.controller 'PlayerCtrl', ['$scope', 'musicManager', ($scope, musicManager) -
       $scope.playing = true
       $scope.enabled = true
       song = musicManager.currentSong()
-      $scope.title = "Hello World"
-      $scope.artistTitle = "Jais Cheema"
+      $scope.title = song.title
+      $scope.artistTitle = song.artist_title
     else if state == MusicManagerState.paused
       $scope.playing = false
     else if state == MusicManagerState.waiting or state == MusicManagerState.inactive
@@ -31,7 +31,14 @@ app.controller 'PlayerCtrl', ['$scope', 'musicManager', ($scope, musicManager) -
   $scope.$on 'playPositionChanged', (event, position, duration) ->
     $scope.position = position
     $scope.duration = duration
+    if duration > 0
+      $scope.positionPercent = (position/duration) * 100.00
+    else
+      $scope.positionPercent = 0
 
   $scope.$on 'loadPositionChanged', (event, bytesLoaded, totalBytes) ->
-    console.log "Loading: #{bytesLoaded}/#{totalBytes}"
+    if totalBytes > 0
+      $scope.loadPercent = (bytesLoaded/totalBytes) * 100.00
+    else
+      $scope.loadPercent = 0
 ]

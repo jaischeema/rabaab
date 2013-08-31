@@ -1,6 +1,6 @@
 app.factory 'dataFactory', [ '$http', ($http) ->
   base_url = 'http://squirrel.jaischeema.com/v1'
-  test_mode = false
+  test_mode = true
   unless test_mode
     return {
       getLatestAlbums: -> $http.get("#{base_url}/latest_albums")

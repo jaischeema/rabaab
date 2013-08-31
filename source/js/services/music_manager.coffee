@@ -5,11 +5,17 @@ class MusicManager
     @state = MusicManagerState.inactive
     @playlistIds = []
     @volume = 40
+    @setupKeyboardListeners()
     soundManager.setup
       url: '/js/vendor/'
       flashVersion: 9
       preferFlash: true,
       onready: => @changeState(MusicManagerState.waiting)
+
+  setupKeyboardListeners: ->
+    @$scope.$on 'togglePlayPause', => @togglePlayPause()
+    @$scope.$on 'next', => @next()
+    @$scope.$on 'previous', => @previous()
 
   createSong: (id, url) ->
     self = this
@@ -37,7 +43,7 @@ class MusicManager
       @$scope.$broadcast('trackAdded', song)
       if @state == MusicManagerState.waiting and not @currentIndex?
         @currentIndex = 0
-        this.createSong(song_id, song.low_quality)
+        this.createSong(song_id, song.url)
     else
       console.log "Already in playlist, ignored!"
 
@@ -81,7 +87,7 @@ class MusicManager
 
   songURL: (index) ->
     song_id = @playlistIds[index]
-    @playlist[song_id].low_quality
+    @playlist[song_id].url
 
   playSongAtCurrentIndex: ->
     @currentSound.destruct()
@@ -94,4 +100,4 @@ class MusicManager
     else
       @$scope.$apply(fn)
 
-app.factory 'musicManager', ($rootScope) -> new MusicManager($rootScope)
+app.factory 'musicManager', ['$rootScope', 'keyboardProvider', ($rootScope, keyboardProvider) -> new MusicManager($rootScope, keyboardProvider) ]
