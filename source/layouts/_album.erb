@@ -1,0 +1,6 @@
+<script type="text/ng-template" id="album">
+<div class="container">
+  <h1 class="title">{{album.title}} by {{album.artist.title}}</h1>
+  <ul class="list-group" song-list songs="album.songs" on-song-select="playSong(song)"></ul>
+</div>
+</script>

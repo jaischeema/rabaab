@@ -11,10 +11,11 @@
     = javascript_include_tag  "/js/vendor/jquery-1.10.1.min.js"
     = javascript_include_tag  "/js/vendor/angular.min.js"
     = javascript_include_tag  "/js/vendor/angular-route.min.js"
+    = javascript_include_tag  "/js/vendor/compat.js"
     = javascript_include_tag  "vendor/soundmanager2.js"
     = javascript_include_tag  "application"
   %body
-    = partial 'layouts/search_controller'
+    #search-form.navbar.navbar-fixed-top.searchBox
     = yield
     = partial 'layouts/player_controller'
 
@@ -22,3 +23,5 @@
     = partial 'layouts/album_list'
     = partial 'layouts/song_list'
     = partial 'layouts/latest_albums'
+    = partial 'layouts/search'
+    = partial 'layouts/album'

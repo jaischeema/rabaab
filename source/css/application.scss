@@ -3,15 +3,9 @@ body {
   padding-top: 80px;
 }
 
-html,body, #main-content, #main-content .row, #albums, #latest-albums
-{
-  height: 100%;
-}
-
-.scroller
-{
-  height: 90%;
-  overflow-y:scroll;
+::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder {
+    color:    #ddd;
+    font-weight: 100;
 }
 
 .navbar {
@@ -23,11 +17,6 @@ html,body, #main-content, #main-content .row, #albums, #latest-albums
   background-color: #2c3e50;
   min-height: 120px;
 }
-
-.container {
-  max-width: 100%;
-}
-
 
 #player-buttons {
   text-align: center;
@@ -120,48 +109,45 @@ html,body, #main-content, #main-content .row, #albums, #latest-albums
 h1.title {
   padding-left: 10px;
   font-weight: 200;
+  padding: 20px;
+  background-color: whitesmoke;
 }
 
-a small.muted {
-  color: #888;
-}
-
-.album-list {
-  list-style: none;
-  padding-left: 12px;
-}
-
-.album-cell {
-  display: block;
-  padding: 10px 0;
-  font-weight: 200;
-  font-size: 18px;
-
-  a {
-    color: #444;
-    small
-    {
-      color: #999;
-    }
-  }
-}
-
-.song-list {
-  list-style: none;
-  padding-left: 12px;
+.list-group-item:first-child
+{
+  border-radius: 0px;
 }
 
 .song-cell {
-  display: block;
-  padding: 10px 0;
   font-weight: 200;
   font-size: 18px;
-
+  border-radius: 0px;
+  border: 0px;
+  padding: 20px 10px;
+  border-top: 1px solid #eee;
   a {
     color: #444;
+    cursor: pointer;
     small
     {
       color: #999;
     }
   }
+}
+
+.album {
+  border: 0px;
+  min-height: 100px;
+  text-align: center;
+  color: #777;
+  font-weight: 200;
+  border-top: 2px solid #ccc;
+  border-radius: 0px;
+  h4 { font-weight: 400 }
+}
+
+a.thumbnail:hover {
+  border-color: #000;
+  color: #111;
+  text-decoration: none;
 }

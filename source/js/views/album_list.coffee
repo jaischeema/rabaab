@@ -1,6 +1,5 @@
 app.directive 'albumList', ->
   restrict: 'A'
   scope:
-    albums: "="
-    onAlbumSelect: "&"
+    groups: "="
   templateUrl: 'album-list'

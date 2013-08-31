@@ -1,7 +1,10 @@
 <script type="text/ng-template" id="album-list">
-  <li class="album-cell" ng-repeat="album in albums">
-    <a href="#" ng-click="onAlbumSelect({album: album})">
-      {{album.title}} <small>by {{album.artist_title}}</small>
-    <a/>
-  </li>
+  <div ng-repeat="group in groups" class="row">
+    <div class="col-lg-3" ng-repeat="album in group">
+      <a href="#/album/{{album.id}}" class="thumbnail album">
+        <h4>{{album.title}}</h4>
+        <span>{{album.artist_title}}</span>
+      </a>
+    </div>
+  </div>
 </script>

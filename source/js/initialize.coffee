@@ -3,6 +3,17 @@
 app.config ($routeProvider, $locationProvider) ->
   $routeProvider.when('/',
     templateUrl: 'latest-albums'
-    controller: "LatestAlbumsCtrl"
+    controller: 'LatestAlbumsCtrl'
   )
-  $locationProvider.html5Mode(true)
+  .when('/album/:albumId',
+    templateUrl: 'album'
+    controller: 'AlbumCtrl'
+  )
+  .when('/search/:type/:query',
+    templateUrl: 'search'
+    controller: 'SearchCtrl'
+  )
+
+app.config ['$httpProvider', ($httpProvider) ->
+  $httpProvider.defaults.cache = true
+]

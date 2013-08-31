@@ -1,27 +1,9 @@
-app.controller "LatestAlbumsCtrl", ['$scope', 'dataFactory', 'musicManager', ($scope, dataFactory, musicManager) ->
+app.controller "LatestAlbumsCtrl", ['$scope', 'dataFactory', ($scope, dataFactory) ->
   $scope.latest_albums = []
-  $scope.showingAlbum = true
-  $scope.currentAlbum = null
 
   getLatestAlbums = ->
     dataFactory.getLatestAlbums().success (albums) ->
-      $scope.latest_albums = albums.albums
-
-  $scope.showAlbum = (album) ->
-    dataFactory.getAlbum(album.id).success (album_data) ->
-      $scope.currentAlbum = album_data
-
-  $scope.playSong = (song) ->
-    dataFactory.getSong(song.id).success (song_data) ->
-      playlist_song = {id: song.id, title: song.title, artist_title: song.artist_title, album_title: $scope.currentAlbum.title, url: song_data.low_quality}
-      musicManager.enqueue(playlist_song)
-
-  $scope.$watch 'currentAlbum', ->
-    if $scope.currentAlbum == null
-      $scope.showingAlbum = false
-    else
-      $scope.showingAlbum = true
-      console.log $scope.currentAlbum
+      $scope.latest_albums = albums.albums.chunk(4)
 
   getLatestAlbums()
 ]
