@@ -1,5 +1,3 @@
-#page "/path/to/file.html", :layout => false
-
 activate :livereload
 
 set :css_dir, 'css'
@@ -9,10 +7,8 @@ set :images_dir, 'images'
 set :haml, :format => :html5
 
 configure :build do
-  ignore 'js/vendor/*'
-
   activate :minify_css
-  activate :minify_javascript
+#  activate :minify_javascript
 end
 
 activate :deploy do |deploy|

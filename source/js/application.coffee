@@ -1,5 +1,3 @@
-//= require './vendor/nprogress'
-//= require './vendor/mousetrap.min'
 //= require 'initialize'
 //= require_tree './controllers'
 //= require_tree './services'
