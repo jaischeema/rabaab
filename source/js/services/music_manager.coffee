@@ -27,6 +27,7 @@ class MusicManager
       onload: -> self.changeState(MusicManagerState.playing)
       whileplaying: -> self.safeApply => self.$scope.$broadcast('playPositionChanged', this.position, this.duration)
       whileloading: -> self.safeApply => self.$scope.$broadcast('loadPositionChanged', this.bytesLoaded, this.bytesTotal)
+      onfinish: -> self.next()
       volume: @volume
 
   currentState: -> @state
