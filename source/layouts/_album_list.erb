@@ -1,7 +1,7 @@
 <script type="text/ng-template" id="album-list">
   <div ng-repeat="group in groups" class="row">
     <div class="col-lg-3" ng-repeat="album in group">
-      <a href="#/album/{{album.id}}" class="thumbnail album">
+      <a class="thumbnail album" ng-click='showAlbum(album.id)'>
         <h4>{{album.title}}</h4>
         <span>{{album.artist_title}}</span>
       </a>
