@@ -7,5 +7,6 @@
       "scripts": ["js/background.js"]
     }
   },
+  "offline_enabled": false,
   "icons": { "16": "images/triangular-icon-16.png", "128": "images/triangular-icon-128.png" }
 }
