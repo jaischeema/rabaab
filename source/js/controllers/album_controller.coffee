@@ -7,7 +7,7 @@ app.controller 'AlbumCtrl', ['$scope', '$routeParams', 'dataFactory', 'musicMana
 
   $scope.playSong = (song) ->
     dataFactory.getSong(song.id).success (song_data) ->
-      playlist_song = {id: song.id, title: song.title, artist_title: song.artist_title, album_title: $scope.album.title, url: song_data.low_quality}
+      playlist_song = {id: song.id, title: song.title, artist_title: song.artist_title, album_title: $scope.album.title, url: song_data.low_quality_url}
       musicManager.enqueue(playlist_song)
 
   getAlbum()
