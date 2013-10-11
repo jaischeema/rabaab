@@ -1,5 +1,5 @@
 app.factory 'dataFactory', [ '$http', ($http) ->
-  base_url = 'http://squirrel.jaischeema.com/v1'
+  base_url = 'http://squirrel.jaischeema.com/api'
   test_mode = false
   unless test_mode
     return {
