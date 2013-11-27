@@ -1,14 +1,5 @@
-app.controller 'AlbumCtrl', ['$scope', '$routeParams', 'dataFactory', 'musicManager', ($scope, $routeParams, dataFactory, musicManager) ->
-  $scope.albumId = $routeParams.albumId
+App.AlbumRoute = Ember.Route.extend
+  model: (params) ->
+    return Ember.$.getJSON("http://squirrel.jaischeema.com/api/album?id=#{params.album_id}")
 
-  getAlbum = ->
-    dataFactory.getAlbum($scope.albumId).success (album_data) ->
-      $scope.album = album_data
-
-  $scope.playSong = (song) ->
-    dataFactory.getSong(song.id).success (song_data) ->
-      playlist_song = {id: song.id, title: song.title, artist_title: song.artist_title, album_title: $scope.album.title, url: song_data.low_quality_url}
-      musicManager.enqueue(playlist_song)
-
-  getAlbum()
-]
+App.AlbumController = Ember.ObjectController.extend()

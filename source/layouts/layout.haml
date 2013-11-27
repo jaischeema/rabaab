@@ -1,5 +1,5 @@
 !!!5
-%html(ng-app="perann" ng-csp)
+%html
   %head
     %meta(charset="utf-8")
     %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
@@ -9,22 +9,19 @@
     = stylesheet_link_tag "/css/vendor/bootstrap-glyphicons.css"
     = stylesheet_link_tag "/css/vendor/nprogress.css"
     = stylesheet_link_tag "application"
-    = javascript_include_tag  "/js/vendor/jquery-1.10.1.min.js"
-    = javascript_include_tag  "/js/vendor/angular.min.js"
-    = javascript_include_tag  "/js/vendor/angular-route.min.js"
+  %body
+    -# Handlebar templates
+    = partial 'layouts/application'
+    = partial 'layouts/navigation'
+    = partial 'layouts/latest_albums'
+    = partial 'layouts/album'
+
+    -# javascript includes
+    = javascript_include_tag  "/js/vendor/jquery-1.10.2.js"
+    = javascript_include_tag  "/js/vendor/handlebars-1.1.2.js"
+    = javascript_include_tag  "/js/vendor/ember-1.2.0.js"
     = javascript_include_tag  "/js/vendor/compat.js"
     = javascript_include_tag  "/js/vendor/nprogress.js"
     = javascript_include_tag  "/js/vendor/mousetrap.min.js"
     = javascript_include_tag  "/js/vendor/soundmanager2.js"
     = javascript_include_tag  "application"
-  %body
-    #search-form.navbar.navbar-fixed-top.searchBox
-    = yield
-    = partial 'layouts/player_controller'
-
-    -# Templates
-    = partial 'layouts/album_list'
-    = partial 'layouts/song_list'
-    = partial 'layouts/latest_albums'
-    = partial 'layouts/search'
-    = partial 'layouts/album'

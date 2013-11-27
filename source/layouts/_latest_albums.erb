@@ -1,6 +1,14 @@
-<script type="text/ng-template" id="latest-albums">
-  <div class="container" ng-controller="LatestAlbumsCtrl" id="main-content">
-    <h1 class="title">Latest Albums</h1>
-    <div album-list groups="latest_albums"></div>
+<script type="text/x-handlebars" data-template-name="latest_albums">
+  <h1 class="title">
+    Latest Albums 
+    <span class="pull-right label label-danger">{{album_count}}</span>
+  </h1>
+  <div class="list-group">
+    {{#each}}
+      {{#link-to 'album' id classNames='list-group-item'}}
+        {{title}}
+        <span class="badge">{{artist_title}}</span>
+      {{/link-to}}
+    {{/each}}
   </div>
 </script>

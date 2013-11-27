@@ -100,5 +100,3 @@ class MusicManager
       @$scope.$eval(fn)
     else
       @$scope.$apply(fn)
-
-app.factory 'musicManager', ['$rootScope', 'keyboardProvider', ($rootScope, keyboardProvider) -> new MusicManager($rootScope, keyboardProvider) ]

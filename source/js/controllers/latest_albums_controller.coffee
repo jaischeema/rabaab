@@ -1,9 +1,19 @@
-app.controller "LatestAlbumsCtrl", ['$scope', 'dataFactory', ($scope, dataFactory) ->
-  $scope.latest_albums = []
+App.LatestAlbumsRoute = Ember.Route.extend
+  model: ->
+    return new Ember.RSVP.Promise (resolve) ->
+      posts = []
+      $.getJSON 'http://squirrel.jaischeema.com/api/latest_albums.json', (data) ->
+        for album in data.albums
+          post = App.Album.create()
+          post.setProperties(album)
+          posts.push post
+        resolve(posts)
 
-  getLatestAlbums = ->
-    dataFactory.getLatestAlbums().success (albums) ->
-      $scope.latest_albums = albums.albums.chunk(4)
+  setupController: (controller, albums) ->
+    controller.set('model', albums)
 
-  getLatestAlbums()
-]
+App.LatestAlbumsController = Ember.ArrayController.extend
+  album_count: ( ->
+    this.get('model.length')
+  ).property()
+

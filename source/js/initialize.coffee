@@ -1,30 +1,9 @@
-@app = angular.module("perann", ['ngRoute'])
+window.App = Ember.Application.create
+  LOG_TRANSITIONS: true
 
-app.config ($routeProvider, $locationProvider) ->
-  $routeProvider.when('/',
-    templateUrl: 'latest-albums'
-    controller: 'LatestAlbumsCtrl'
-    )
-  .when('/album/:albumId',
-    templateUrl: 'album'
-    controller: 'AlbumCtrl'
-    )
-  .when('/search/:type/:query',
-    templateUrl: 'search'
-    controller: 'SearchCtrl'
-    )
+App.IndexRoute = Ember.Route.extend
+  redirect: -> @transitionTo("latest_albums")
 
-app.config ['$httpProvider', ($httpProvider) ->
-  $httpProvider.defaults.cache = true
-  $httpProvider.interceptors.push ($q, $rootScope) ->
-    return (
-      'request': (config) ->
-        if /squirrel/.test(config.url)
-          NProgress.start()
-        return config or $q.when config
-      'response': (response) ->
-        if /squirrel/.test(response.config.url)
-          NProgress.done()
-        return response
-    )
-]
+App.Router.map ->
+  @resource 'latest_albums'
+  @resource 'album', { path: '/albums/:album_id'}

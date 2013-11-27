@@ -1,6 +1,22 @@
-<script type="text/ng-template" id="album">
-<div class="container">
-  <h1 class="title">{{album.title}} by {{album.artist.title}}</h1>
-  <ul class="list-group" song-list songs="album.songs" on-song-select="playSong(song)"></ul>
-</div>
+<script type="text/x-handlebars" data-template-name="album">
+  <h1 class="title">
+    {{title}}
+    <span class="pull-right label label-danger">{{artist.title}}</span>
+  </h1>
+  <table class="table">
+    <thead>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Artist Title</th>
+    </thead>
+    <tbody>
+      {{#each song in songs}}
+        <tr>
+          <td>{{song.id}}</td>
+          <td>{{song.title}}</td>
+          <td>{{song.artist_title}}</td>
+        </tr>
+      {{/each}}
+    <tbody>
+  </ol>
 </script>
