@@ -2,7 +2,7 @@ App.LatestAlbumsRoute = Ember.Route.extend
   model: ->
     return new Ember.RSVP.Promise (resolve) ->
       posts = []
-      $.getJSON 'http://squirrel.jaischeema.com/api/latest_albums.json', (data) ->
+      $.getJSON "#{App.squirrel_url}/latest_albums.json", (data) ->
         for album in data.albums
           post = App.Album.create()
           post.setProperties(album)

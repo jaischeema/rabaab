@@ -1,11 +1,13 @@
-body {
+body
+{
   padding-bottom: 120px;
   padding-top: 60px;
 }
 
-::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder {
-    color:    #ddd;
-    font-weight: 100;
+::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder
+{
+  color:    #ddd;
+  font-weight: 100;
 }
 
 .navbar.navbar-fixed-bottom
@@ -132,18 +134,6 @@ h1.title {
 }
 
 .album {
-  border: 0px;
-  min-height: 100px;
-  text-align: center;
-  color: #777;
   font-weight: 200;
-  border-top: 2px solid #ccc;
-  border-radius: 0px;
   h4 { font-weight: 400 }
-}
-
-a.thumbnail:hover {
-  border-color: #000;
-  color: #111;
-  text-decoration: none;
 }
