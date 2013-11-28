@@ -1,139 +1,43 @@
-body
+@import 'sidebar';
+
+h1.title
 {
-  padding-bottom: 120px;
-  padding-top: 60px;
+  margin-top: 0px;
 }
 
-::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder
+.sidebar-nav li a.active
 {
-  color:    #ddd;
-  font-weight: 100;
-}
-
-.navbar.navbar-fixed-bottom
-{
-  background-color: #2c3e50;
-  min-height: 120px;
-}
-
-#player-buttons {
-  text-align: center;
-
-  span {
-    display: block;
-    padding-top: 32px;
-    font-size: 42px;
-    color: white;
-    text-decoration: none;
-
-    &#play-button {
-      font-size: 72px;
-      padding-top: 10px;
-    }
-
-    &#next-button {
-      margin-left: 25px;
-    }
-
-    &.disabled {
-      color: #ccc;
-      pointer-events: none;
-      cursor: default;
-    }
-  }
-}
-
-#player-progress {
-  margin-top: 5px;
-
-  .timing {
-    font-weight: 100;
-    font-size: 42px;
-    color: white;
-
-    &#total-time {
-      text-align: right;
-    }
-  }
-
-  #title {
-    text-align: center;
-    font-weight: 400;
-    color: white;
-    font-size: 28px;
-    padding-top: 8px;
-
-    span.artist-title {
-      font-weight: 100;
-      color: #eee;
-    }
-  }
-}
-
-
-.input-group .form-control {
-  width: 99%;
-}
-
-#search-field
-{
-  border-radius: 0px;
-  font-size: 38px;
-  font-weight: 200;
-  border: 0px;
-  height: 75px;
-  padding-left: 10px;
-  margin-right:10px;
-  border-bottom: 1px solid #ddd;
-  box-shadow: 0 0 0;
-
-  &:focus {
-    border-color: #777;
-    outline: 0;
-    -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,0.075),0 0 0px rgba(102,175,233,0.6);
-    box-shadow: inset 0 0px 0px rgba(0,0,0,0.075),0 0 0px rgba(102,175,233,0.6);
-  }
-}
-
-#search-button
-{
-  padding: 15px 20px;
-  border-radius: 2px;
+  color: #fff;
   font-weight: 700;
-  margin-top: 7px;
-  text-transform: uppercase;
+  text-decoration: none;
 }
 
-h1.title {
-  padding-left: 10px;
-  font-weight: 200;
-  padding: 20px;
-  background-color: whitesmoke;
-}
-
-.list-group-item:first-child
+.sidebar-nav > .sidebar-brand a
 {
-  border-radius: 0px;
-}
+  color: #ff9900;
+  font-size: 24px;
+  line-height: 80px;
+  height: 85px;
 
-.song-cell {
-  font-weight: 200;
-  font-size: 18px;
-  border-radius: 0px;
-  border: 0px;
-  padding: 20px 10px;
-  border-top: 1px solid #eee;
-  a {
-    color: #444;
-    cursor: pointer;
-    small
-    {
-      color: #999;
-    }
+  &.active
+  {
+    color: #ff9900;
+    font-weight: normal;
   }
 }
 
-.album {
-  font-weight: 200;
-  h4 { font-weight: 400 }
+#search-form
+{
+  background-color: #222;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  padding: 5px 0;
+  margin:10px auto 10px;
+  input.form-control
+  {
+    color: white;
+    background: transparent;
+    border-color: transparent;
+    padding: 6px 12px 6px 18px;
+  }
 }

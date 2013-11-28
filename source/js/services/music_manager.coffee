@@ -6,11 +6,6 @@ class MusicManager
     @playlistIds = []
     @volume = 40
     @setupKeyboardListeners()
-    soundManager.setup
-      url: '/js/vendor/'
-      flashVersion: 9
-      preferFlash: true,
-      onready: => @changeState(MusicManagerState.waiting)
 
   setupKeyboardListeners: ->
     @$scope.$on 'togglePlayPause', => @togglePlayPause()

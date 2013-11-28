@@ -3,6 +3,14 @@ window.App = Ember.Application.create
 
 App.squirrel_url = "http://squirrel.jaischeema.com/api"
 
+App.initializer
+  name: "soundmanager"
+  initialize: ->
+    soundManager.setup
+      url: '/js/vendor/'
+      flashVersion: 9
+      preferFlash: true
+
 App.IndexRoute = Ember.Route.extend
   redirect: -> @transitionTo('latest_albums')
 

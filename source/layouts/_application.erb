@@ -1,6 +1,12 @@
-<script type="text/x-handlebars" data-template-name="application">
-  {{partial 'navbar'}}
-  <div class="container">
-    {{outlet}}
+<script type='text/x-handlebars' id='application'>
+  <div id='wrapper'>
+    <div id='sidebar-wrapper'>
+      {{partial 'sidebar'}}
+    </div>
+    <div id='page-content-wrapper'>
+      <div class="page-content inset">
+        {{outlet}}
+      </div>
+    </div>
   </div>
 </script>
