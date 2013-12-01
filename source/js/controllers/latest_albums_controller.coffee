@@ -9,9 +9,6 @@ App.LatestAlbumsRoute = Ember.Route.extend
           posts.push post
         resolve(posts)
 
-  setupController: (controller, albums) ->
-    controller.set('model', albums)
-
 App.LatestAlbumsController = Ember.ArrayController.extend
   album_count: ( ->
     this.get('model.length')

@@ -2,9 +2,7 @@
   <ul class="sidebar-nav">
     <li class="sidebar-brand">{{#link-to "latest_albums"}}Triangular{{/link-to}}</li>
     <li id="search-form">
-      <form>
-        <input type="text" class="form-control" placeholder="Search for song, album or artist">
-      </form>
+      {{input type="text" value=query classNames="form-control" action="search" placeholder="Search for music"}}
     </li>
     <li>{{#link-to "latest_albums"}}Latest Albums{{/link-to}}</li>
     <li class="divider"></li>

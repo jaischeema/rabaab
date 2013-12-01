@@ -1,0 +1,41 @@
+<script type="text/x-handlebars" id="_album">
+  {{#link-to 'album' result.id classNames='list-group-item'}}
+    {{result.title}}
+    <span class="badge">{{result.artist.title}}</span>
+  {{/link-to}}
+</script>
+
+<script type="text/x-handlebars" id="_song">
+  {{#link-to 'album' result.album_id classNames='list-group-item'}}
+    {{result.title}}
+    <span class="badge">{{result.artist_title}}</span>
+  {{/link-to}}
+</script>
+
+<script type="text/x-handlebars" id="_artist">
+  {{#link-to 'artist' result.id classNames='list-group-item'}}
+    {{result.title}}
+  {{/link-to}}
+</script>
+
+<script type="text/x-handlebars" id="search">
+  <div class="search-results">
+    <h1 class="title">
+      {{type}} search results for <i>{{query}}</i>
+    </h1>
+    <div class="list-group">
+      {{#each result in results}}
+        {{#if isAlbum}}
+          {{partial 'album'}}
+        {{else}}
+          {{#if isArtist}}
+            {{partial 'artist'}}
+          {{else}}
+            {{partial 'song'}}
+          {{/if}}
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</script>
+

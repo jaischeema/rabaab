@@ -17,3 +17,11 @@ App.IndexRoute = Ember.Route.extend
 App.Router.map ->
   @resource 'latest_albums'
   @resource 'album', path: '/album/:album_id'
+  @resource 'artist', path: '/artist/:artist_id'
+  @resource 'search', path: '/search/:query'
+
+App.ApplicationController = Em.ObjectController.extend
+  query: ''
+  actions:
+    search: ->
+      @transitionToRoute('search', @get('query'))
