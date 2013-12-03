@@ -4,7 +4,7 @@
   paused:   3
 
 App.PlayerController = Ember.ObjectController.extend
-  playlist:[]
+  playlist: App.Playlist.create()
   volume: 40
   currentState: PlayerState.waiting
   currentPosition: 0
@@ -35,16 +35,10 @@ App.PlayerController = Ember.ObjectController.extend
 
   enqueue: (song) ->
     obj = App.Song.create(song)
-    @pushObject(obj)
-    if @get('model')?
-      Ember.debug "Added song to playlist"
-    else
-      Ember.debug "Start Playing the song"
+    @get('playlist').addSong(song)
+    unless @get('model')?
       @set('model', obj)
       obj.refresh() unless obj.get('isPlayable')
-
-  pushObject: (song) ->
-    @get('playlist').pushObject song
 
   musicURLFetchedForModel: ( ->
     model = @get('model')
@@ -83,10 +77,16 @@ App.PlayerController = Ember.ObjectController.extend
         Ember.debug "No sound present"
 
     next: ->
-      Ember.debug "next action"
+      next_song = @get('playlist').next()
+      if next_song?
+        @set('model', next_song)
+        next_song.refresh() unless next_song.get('isPlayable')
 
     previous: ->
-      Ember.debug "previous action"
+      next_song = @get('playlist').previous()
+      if next_song?
+        @set('model', next_song)
+        next_song.refresh() unless next_song.get('isPlayable')
 
     shuffle: ->
       Ember.debug "shuffle action"
