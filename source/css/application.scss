@@ -1,5 +1,10 @@
 @import 'sidebar';
 
+body
+{
+  padding-bottom: 90px;
+}
+
 h1.title
 {
   margin-top: 0px;
@@ -39,5 +44,87 @@ h1.title
     background: transparent;
     border-color: transparent;
     padding: 6px 12px 6px 18px;
+  }
+}
+
+#footer-nav
+{
+  height: 90px;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.15);
+  background-color: #563d7c;
+  border-color: #463265;
+  box-shadow: 0 1px 0 rgba(255,255,255,.1);
+  border-top: 0px;
+
+  #progress
+  {
+    height: 7px;
+    border-radius: 0px;
+    margin-bottom: 0px;
+  }
+
+  #track-info
+  {
+    text-align: center;
+    h2,p
+    {
+      margin: 0px;
+      font-weight: 200;
+      color: white;
+      text-transform: uppercase;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    h2
+    {
+      font-size: 25px;
+      margin: 15px 0px 3px;
+    }
+  }
+
+  #timing-info
+  {
+    text-align: right;
+    margin-top: 18px;
+    span
+    {
+      font-weight: 100;
+      color: white;
+      font-size: 30px;
+      margin-right: 5px;
+    }
+  }
+}
+
+#media-buttons
+{
+  padding-top: 5px;
+  .btn-media
+  {
+    color: white;
+    font-size: 22px;
+
+    &:hover
+    {
+      color: #ccc;
+    }
+
+    &.active
+    {
+      color: #aaa;
+    }
+  }
+
+  #next-btn, #previous-btn
+  {
+    font-size: 28px;
+  }
+
+  #play-btn
+  {
+    font-size: 45px;
   }
 }

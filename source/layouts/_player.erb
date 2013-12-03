@@ -1,7 +1,45 @@
+<script type="text/x-handlebars" id="_player_playing">
+<div class="progress" id="progress">
+  <div class="progress-bar progress-bar-danger" {{bind-attr style="playProgressWidth"}}></div>
+  <div class="progress-bar progress-bar-success" {{bind-attr style="downloadProgressWidth"}}></div>
+</div>
+<div class="row">
+  <div class="button-group col-md-3" id="media-buttons">
+    <a {{action 'repeat'}} class="btn btn-media" id="shuffle-btn">
+      <i class="glyphicon glyphicon-repeat"></i>
+    </a>
+    <a {{action 'previous'}} class="btn btn-media" id="previous-btn">
+      <i class="glyphicon glyphicon-backward"></i>
+    </a>
+    <a {{action 'togglePlayPause'}} class="btn btn-media" id="play-btn">
+      <i {{bind-attr class=":glyphicon playButtonClass"}}></i>
+    </a>
+    <a {{action 'next'}} class="btn btn-media" id="next-btn">
+      <i class="glyphicon glyphicon-forward"></i>
+    </a>
+    <a {{action 'shuffle'}} class="btn btn-media" id="shuffle-btn">
+      <i class="glyphicon glyphicon-retweet"></i>
+    </a>
+  </div>
+  <div id="track-info" class="col-md-6">
+    <h2>{{title}}</h2>
+    <p>{{artist_title}}</p>
+  </div>
+  <div id="timing-info" class="col-md-3">
+    <span>{{format-duration currentPosition}}</span>
+    <span>/</span>
+    <span>{{format-duration currentDuration}}</span>
+  </div>
+</script>
+
+<script type="text/x-handlebars" id="_player_waiting">
+  <span class="navbar-text">Please choose a song to play</span>
+</script>
+
 <script type="text/x-handlebars" id="player">
   {{#if isPlaying}}
-    Playing
+    {{partial 'player_playing'}}
   {{else}}
-    Please select a song to play
+    {{partial 'player_waiting'}}
   {{/if}}
 </script>
