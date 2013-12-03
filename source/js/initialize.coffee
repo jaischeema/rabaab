@@ -23,5 +23,4 @@ App.Router.map ->
 App.ApplicationController = Em.ObjectController.extend
   query: ''
   actions:
-    search: ->
-      @transitionToRoute('search', @get('query'))
+    search: -> @transitionToRoute('search', @get('query'))
