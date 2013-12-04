@@ -43,11 +43,10 @@ App.PlayerController = Ember.ObjectController.extend
     music_url = model.get('musicURL')
     if music_url?
       self = this
-      soundManager.createSound
+      soundManager.createSound(
         id: "sound-#{model.id}"
         url: music_url
         autoLoad: true
-        autoPlay: true
         onplay: ->
           self.set('currentSound', this)
           self.set('currentState', PlayerState.playing)
@@ -60,6 +59,7 @@ App.PlayerController = Ember.ObjectController.extend
           self.set('currentLoadPercent', (this.bytesLoaded/this.bytesTotal) * 100)
         onfinish: -> self.send('next')
         volume: self.get('volume')
+      ).play()
     else
       Ember.debug "Music URL not found"
   ).observes('model.musicURL')
