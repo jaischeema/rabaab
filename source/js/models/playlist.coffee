@@ -3,6 +3,13 @@ App.Playlist = Em.Object.extend
   songs: {}
   currentIndex: -1
 
+  currentSongID: ( ->
+    @get('songIds')[@get('currentIndex')]
+  ).property('songIds', 'currentIndex')
+
+  songTitle: (song_id) ->
+    @get('songs')[song_id].title
+
   addSong: (song) ->
     if @hasSong(song)
       Ember.debug "Song is already in the playlist"

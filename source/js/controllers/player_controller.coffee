@@ -34,11 +34,9 @@ App.PlayerController = Ember.ObjectController.extend
   ).property('currentState')
 
   enqueue: (song) ->
-    obj = App.Song.create(song)
-    @get('playlist').addSong(song)
-    unless @get('model')?
-      @set('model', obj)
-      obj.refresh() unless obj.get('isPlayable')
+    songObj = App.Song.create(song)
+    @get('playlist').addSong(songObj)
+    @resetCurrentModel(songObj) unless @get('model')?
 
   musicURLFetchedForModel: ( ->
     model = @get('model')
@@ -66,6 +64,16 @@ App.PlayerController = Ember.ObjectController.extend
       Ember.debug "Music URL not found"
   ).observes('model.musicURL')
 
+  resetCurrentModel: (song) ->
+    if song?
+      currentSound = @get('currentSound')
+      currentSound.destruct() if currentSound?
+      @set('currentPosition', 0)
+      @set('currentDuration', 0)
+      @set('currentLoadPercent', 0.00)
+      @set('model', song)
+      song.refresh() unless song.get('isPlayable')
+
   actions:
     togglePlayPause: ->
       current_state = @get('currentState')
@@ -76,17 +84,17 @@ App.PlayerController = Ember.ObjectController.extend
       else
         Ember.debug "No sound present"
 
+    playSong: (song_id) ->
+      song = @get('playlist').get('songs')[song_id]
+      @resetCurrentModel(song)
+
     next: ->
       next_song = @get('playlist').next()
-      if next_song?
-        @set('model', next_song)
-        next_song.refresh() unless next_song.get('isPlayable')
+      @resetCurrentModel(next_song)
 
     previous: ->
-      next_song = @get('playlist').previous()
-      if next_song?
-        @set('model', next_song)
-        next_song.refresh() unless next_song.get('isPlayable')
+      previous_song = @get('playlist').previous()
+      @resetCurrentModel(previous_song)
 
     shuffle: ->
       Ember.debug "shuffle action"

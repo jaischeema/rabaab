@@ -32,12 +32,21 @@
   </div>
 </script>
 
+<script type="text/x-handlebars" id="_playlist">
+<div id="playlist-items">
+  {{#each song_id in playlist.songIds}}
+    <span {{action playSong song_id}} class="item">{{bind-attr text="playlist.songTitle(song_id)"}}</span>
+  {{/each}}
+</div>
+</script>
+
 <script type="text/x-handlebars" id="_player_waiting">
   <span class="navbar-text">Please choose a song to play</span>
 </script>
 
 <script type="text/x-handlebars" id="player">
   {{#if isPlaying}}
+    {{partial 'playlist'}}
     {{partial 'player_playing'}}
   {{else}}
     {{partial 'player_waiting'}}

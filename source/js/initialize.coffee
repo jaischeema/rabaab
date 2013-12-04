@@ -2,6 +2,7 @@ window.App = Ember.Application.create
   LOG_TRANSITIONS: true
 
 App.squirrel_url = "http://squirrel.jaischeema.com/api"
+App.media_url_key = "normal_quality_url"
 
 App.initializer
   name: "soundmanager"
@@ -23,4 +24,7 @@ App.Router.map ->
 App.ApplicationController = Em.ObjectController.extend
   query: ''
   actions:
-    search: -> @transitionToRoute('search', @get('query'))
+    search: ->
+      query = @get('query')
+      @set('query', '')
+      @transitionToRoute('search', query)
