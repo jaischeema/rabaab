@@ -8,14 +8,8 @@ set :haml, :format => :html5
 
 configure :build do
   activate :minify_css
-#  activate :minify_javascript
 end
 
 activate :deploy do |deploy|
-  deploy.build_before = true
-  deploy.method       = :rsync
-  deploy.host         = "home.jaischeema.com"
-  deploy.user         = "jais"
-  deploy.path         = "/var/www/perann"
-  deploy.clean        = true
+  deploy.method = :git
 end
