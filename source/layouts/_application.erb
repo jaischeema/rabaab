@@ -1,15 +1,18 @@
 <script type='text/x-handlebars' id='application'>
-  <div id='wrapper'>
-    <div id='sidebar-wrapper'>
-      {{partial 'sidebar'}}
-    </div>
-    <div id='page-content-wrapper'>
-      <div class="page-content inset">
-        {{outlet}}
-      </div>
-    </div>
-    <nav class="navbar navbar-fixed-bottom navbar-inverse" id="footer-nav">
-      {{render 'player'}}
-    </nav>
+<div class="container">
+  <nav class="navbar navbar-top">
+    <ul class="nav nav-pills">
+      <li>{{#link-to "latest_albums"}}Latest Albums{{/link-to}}</li>
+      <li><a href="#">Search</a></li>
+      <li><a href="#">Recently Played</a></li>
+      <li><a href="#">Playlist</a></li>
+    </ul>
+  </nav>
+  <div class="content">
+    {{outlet}}
   </div>
+  <footer>
+    {{render 'player'}}
+  </footer>
+</div>
 </script>

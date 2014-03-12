@@ -1,0 +1,28 @@
+!!!5
+%html
+  %head
+    %meta(charset="utf-8")
+    %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title Triangular
+    = stylesheet_link_tag "/css/vendor/bootstrap.min.css"
+    = stylesheet_link_tag "/css/vendor/bootstrap-glyphicons.css"
+    = stylesheet_link_tag "/css/vendor/nprogress.css"
+    = stylesheet_link_tag "design"
+  %body
+    %nav.navbar.navbar-inverse.navbar-static-top
+      .container
+        %a.logo(href="/") Triangular
+        %ul.nav.navbar-nav
+          %li <a href='#'>Latest</a>
+          %li <a href='#'>Recent</a>
+          %li <a href='#'>Search</a>
+          %li <a href='#'>Playlist</a>
+    .container
+      .content
+        Some Content
+    %footer.footer
+      .container
+    -# javascript includes
+    = javascript_include_tag  "/js/vendor/jquery-2.1.0.min.js"
+    = javascript_include_tag  "/js/vendor/bootstrap.min.js"
