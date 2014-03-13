@@ -1,12 +1,14 @@
 <script type="text/x-handlebars" id="artist">
-  <div class="artist">
-    <h1 class="title">Artist: {{title}}</h1>
-    <div class="list-group">
-      {{#each album in albums}}
-        {{#link-to 'album' album.id classNames='list-group-item'}}
-          {{album.title}}
-        {{/link-to}}
-      {{/each}}
-    </div>
-  </div>
+<div class="artist">
+  <h1 class="header">Artist: {{title}}</h1>
+  <ul class="list list-albums">
+    {{#each album in albums}}
+      <li>
+      {{#link-to 'album' album.id classNames='title'}}
+        <span class="title">{{album.title}}</span>
+      {{/link-to}}
+      </li>
+    {{/each}}
+  </ul>
+</div>
 </script>

@@ -1,35 +1,22 @@
 <script type="text/x-handlebars" id="_player_playing">
-<div class="progress" id="progress">
-  <div class="progress-bar progress-bar-danger" {{bind-attr style="playProgressWidth"}}></div>
-  <div class="progress-bar progress-bar-success" {{bind-attr style="downloadProgressWidth"}}></div>
+<div class="player">
+  <div class="row">
+    <div class="info col-xs-8">
+      <div class="title">{{title}}</div>
+      <div class="author">{{artist_title}}</div>
+    </div>
+    <div class="timing col-xs-4">
+      <span class="current">{{format-duration currentPosition}}</span>
+      <span>/</span>
+      <span class="total">{{format-duration currentDuration}}</span>
+    </div>
+  </div>
+  <div class="buttons">
+    <a {{action 'previous'}} class="icon-to-start" id="previous-btn"></a>
+    <a {{action 'togglePlayPause'}} class="icon-play" id="play-btn"></a>
+    <a {{action 'next'}} class="icon-to-end" id="next-btn"></a>
+  </div>
 </div>
-<div class="row">
-  <div class="button-group col-md-3" id="media-buttons">
-    <a {{action 'repeat'}} class="btn btn-media" id="shuffle-btn">
-      <i class="glyphicon glyphicon-repeat"></i>
-    </a>
-    <a {{action 'previous'}} class="btn btn-media" id="previous-btn">
-      <i class="glyphicon glyphicon-backward"></i>
-    </a>
-    <a {{action 'togglePlayPause'}} class="btn btn-media" id="play-btn">
-      <i {{bind-attr class=":glyphicon playButtonClass"}}></i>
-    </a>
-    <a {{action 'next'}} class="btn btn-media" id="next-btn">
-      <i class="glyphicon glyphicon-forward"></i>
-    </a>
-    <a {{action 'shuffle'}} class="btn btn-media" id="shuffle-btn">
-      <i class="glyphicon glyphicon-retweet"></i>
-    </a>
-  </div>
-  <div id="track-info" class="col-md-6">
-    <h2>{{title}}</h2>
-    <p>{{artist_title}}</p>
-  </div>
-  <div id="timing-info" class="col-md-3">
-    <span>{{format-duration currentPosition}}</span>
-    <span>/</span>
-    <span>{{format-duration currentDuration}}</span>
-  </div>
 </script>
 
 <script type="text/x-handlebars" id="_playlist">
@@ -46,7 +33,6 @@
 
 <script type="text/x-handlebars" id="player">
   {{#if isPlaying}}
-    {{partial 'playlist'}}
     {{partial 'player_playing'}}
   {{else}}
     {{partial 'player_waiting'}}

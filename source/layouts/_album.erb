@@ -1,24 +1,15 @@
 <script type="text/x-handlebars" id="album">
-  <div class="album">
-    <h1 class="title">
-      {{title}}
-      <span class="pull-right label label-danger">{{artist.title}}</span>
-    </h1>
-    <table class="table">
-      <thead>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Artist Title</th>
-      </thead>
-      <tbody>
-        {{#each song in songs}}
-          <tr>
-            <td><a class="btn btn-small btn-danger" {{action 'play' song}}>{{song.id}}</a></td>
-            <td>{{song.title}}</td>
-            <td>{{song.artist_title}}</td>
-          </tr>
-        {{/each}}
-      <tbody>
-    </table>
-  </div>
+<div class="album">
+  <h1 class="header">{{title}}</h1>
+  <ul class="list list-albums">
+    {{#each song in songs}}
+      <li>
+        <a {{action 'play' song}}>
+          <span class="title">{{song.title}}</span>
+          <span class="artist">{{song.artist_title}}</span>
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+</div>
 </script>

@@ -1,148 +1,136 @@
-@import 'sidebar';
+@import url(http://fonts.googleapis.com/css?family=Lato|Pacifico);
+@import 'vendor/jais.css';
+@import 'vendor/animation.css';
 
 body
 {
-  padding-bottom: 145px;
+  background: url(/images/bg.jpg);
+  color: #eee;
+  font-family: 'Lato', sans-serif;
+  padding: 50px 0 150px;
 }
 
-h1.title
+a { color: #ddd; }
+.container { width: 768px; }
+
+.navbar
 {
-  margin-top: 0px;
-}
-
-.sidebar-nav li a.active
-{
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand a
-{
-  color: #ff9900;
-  font-size: 24px;
-  line-height: 80px;
-  height: 85px;
-
-  &.active
+  .navbar-brand
   {
-    color: #ff9900;
-    font-weight: normal;
-  }
-}
-
-#search-form
-{
-  background-color: #222;
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
-  padding: 5px 0;
-  margin:10px auto 10px;
-  input.form-control
-  {
-    color: white;
-    background: transparent;
-    border-color: transparent;
-    padding: 6px 12px 6px 18px;
-  }
-}
-
-#footer-nav
-{
-  height: 145px;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.15);
-  background-color: #563d7c;
-  border-color: #463265;
-  box-shadow: 0 1px 0 rgba(255,255,255,.1);
-  border-top: 0px;
-
-  #playlist-items
-  {
-    background-color: #222;
-    padding: 10px;
-
-    .item
-    {
-      cursor: pointer;
-      padding: 5px;
-      color: whitesmoke;
-      background-color: #444;
-      border-radius: 2px;
-      font-size: 18px;
-      display: inline-block;
-      font-weight: 200;
-    }
-  }
-
-  #progress
-  {
-    height: 7px;
-    border-radius: 0px;
-    margin-bottom: 0px;
-  }
-
-  #track-info
-  {
+    font-family: Pacifico, Lato;
+    color: #999;
+    text-shadow: 0px 1px 0px rgba(0,0,0,.5);
+    font-weight: 700;
     text-align: center;
-    h2,p
-    {
-      margin: 0px;
-      font-weight: 200;
-      color: white;
-      text-transform: uppercase;
-      font-size: 13px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    h2
-    {
-      font-size: 25px;
-      margin: 15px 0px 3px;
-    }
   }
 
-  #timing-info
+  .form-control
   {
-    text-align: right;
-    margin-top: 18px;
-    span
-    {
-      font-weight: 100;
-      color: white;
-      font-size: 30px;
-      margin-right: 5px;
+    margin-top: 2px;
+    width: 240px;
+    border-color: #666;
+    background-color: #555;
+    color: #eee;
+    border-radius: 16px;
+  }
+}
+
+
+footer
+{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #222;
+  .container
+  {
+    padding: 10px 0;
+    border-top: 1px solid #222;
+  }
+}
+
+h1.header
+{
+  font-family: Lato;
+  font-size: 2em;
+  margin: 0.67em 0;
+  color: whitesmoke;
+  font-weight: 200;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.list
+{
+  list-style: none;
+  padding-left: 0px;
+
+  li {
+    border-bottom: 1px solid #333;
+    a {
+      display: block;
+      overflow: auto;
+      padding: 10px;
+      color: #aaa;
+
+      &:hover {
+        color: #eee;
+        cursor: pointer;
+        background-color: #333;
+        border-radius: 2px;
+      }
+
+      .title {
+        float: left;
+      }
+
+      .artist {
+        text-transform: uppercase;
+        margin-top: 3px;
+        font-size: 10px;
+        float:right;
+        color: #666;
+      }
     }
   }
 }
 
-#media-buttons
+.player
 {
-  padding-top: 5px;
-  .btn-media
-  {
-    color: white;
-    font-size: 22px;
-
-    &:hover
-    {
-      color: #ccc;
+  .info {
+    .title {
+      font-size: 17px;
+      font-weight: 700;
     }
 
-    &.active
-    {
-      color: #aaa;
+    .author {
+      color: #777;
+    }
+  }
+  .buttons {
+    a {
+      color: #ddd;
+      font-size: 1.2em;
+      &:hover {
+        text-decoration: none;
+        color: white;
+      }
+
+      &#play-btn {
+        font-size: 2em;
+      }
     }
   }
 
-  #next-btn, #previous-btn
-  {
-    font-size: 28px;
-  }
+  .timing {
+    text-align: right;
+    .current {
+      font-weight: 700;
+      font-size: 18px;
+    }
 
-  #play-btn
-  {
-    font-size: 45px;
+    .total {
+      color: #777;
+    }
   }
 }

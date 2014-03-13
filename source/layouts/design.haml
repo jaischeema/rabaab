@@ -8,21 +8,44 @@
     = stylesheet_link_tag "/css/vendor/bootstrap.min.css"
     = stylesheet_link_tag "/css/vendor/bootstrap-glyphicons.css"
     = stylesheet_link_tag "/css/vendor/nprogress.css"
-    = stylesheet_link_tag "design"
+    = stylesheet_link_tag "application"
   %body
-    %nav.navbar.navbar-inverse.navbar-static-top
+    %nav.navbar.navbar-inverse.navbar-fixed-top
       .container
-        %a.logo(href="/") Triangular
+        %a.navbar-brand(href="/") Triangular
         %ul.nav.navbar-nav
           %li <a href='#'>Latest</a>
           %li <a href='#'>Recent</a>
-          %li <a href='#'>Search</a>
           %li <a href='#'>Playlist</a>
-    .container
-      .content
-        Some Content
+        %form.navbar-form.navbar-right(role="search")
+          %input.form-control.input-sm(type="text" placeholder="Search for album, song or artist...")
+    .content
+      .container
+        %h1.header Latest Albums
+        %ul.list.list-albums
+          %li
+            %a
+              %span.title Some casette
+              %span.artist Awesome Singh
+          %li
+            %a
+              %span.title Another casette
+              %span.artist Ghaint Sharma
     %footer.footer
       .container
+        .player
+          .row
+            .info.col-xs-8
+              .title Some title
+              .author Author
+            .timing.col-xs-4
+              %span.current 1:23
+              %span.total / 3:45
+          .buttons
+            %a#previous-btn.icon-to-start
+            %a#play-btn.icon-play
+            %a#next-btn.icon-to-end
+
     -# javascript includes
     = javascript_include_tag  "/js/vendor/jquery-2.1.0.min.js"
     = javascript_include_tag  "/js/vendor/bootstrap.min.js"

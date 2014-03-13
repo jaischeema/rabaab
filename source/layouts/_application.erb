@@ -1,18 +1,25 @@
 <script type='text/x-handlebars' id='application'>
-<div class="container">
-  <nav class="navbar navbar-top">
-    <ul class="nav nav-pills">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <a href="#" class="navbar-brand">Triangular</a>
+    <ul class="nav navbar-nav">
       <li>{{#link-to "latest_albums"}}Latest Albums{{/link-to}}</li>
-      <li><a href="#">Search</a></li>
       <li><a href="#">Recently Played</a></li>
       <li><a href="#">Playlist</a></li>
     </ul>
-  </nav>
-  <div class="content">
+    <div class="navbar-form navbar-right" role="search">
+      {{input type="text" value=query classNames="form-control input-sm" action="search" placeholder="Search for album, song or artist..."}}
+    </div>
+  </div>
+</nav>
+<div class="content">
+  <div class="container">
     {{outlet}}
   </div>
-  <footer>
-    {{render 'player'}}
-  </footer>
 </div>
+<footer class="footer">
+  <div class="container">
+    {{render 'player'}}
+  </div>
+</footer>
 </script>

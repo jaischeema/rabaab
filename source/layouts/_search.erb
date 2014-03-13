@@ -1,41 +1,41 @@
 <script type="text/x-handlebars" id="_album">
-  {{#link-to 'album' result.id classNames='list-group-item'}}
-    {{result.title}}
-    <span class="badge">{{result.artist.title}}</span>
+  {{#link-to 'album' result.id}}
+    <span class="title">{{result.title}}</span>
+    <span class="artist">{{result.artist.title}}</span>
   {{/link-to}}
 </script>
 
 <script type="text/x-handlebars" id="_song">
-  {{#link-to 'album' result.album_id classNames='list-group-item'}}
-    {{result.title}}
-    <span class="badge">{{result.artist_title}}</span>
+  {{#link-to 'album' result.album_id}}
+    <span class="title">{{result.title}}</span>
+    <span class="artist">{{result.artist_title}}</span>
   {{/link-to}}
 </script>
 
 <script type="text/x-handlebars" id="_artist">
-  {{#link-to 'artist' result.id classNames='list-group-item'}}
-    {{result.title}}
+  {{#link-to 'artist' result.id}}
+    <span class="title">{{result.title}}</span>
   {{/link-to}}
 </script>
 
 <script type="text/x-handlebars" id="search">
-  <div class="search-results">
-    <h1 class="title">
+  <h1 class="header">
       {{type}} search results for <i>{{query}}</i>
-    </h1>
-    <div class="list-group">
-      {{#each result in results}}
-        {{#if isAlbum}}
-          {{partial 'album'}}
+  </h1>
+  <ul class="list list-search">
+    {{#each result in results}}
+      <li>
+      {{#if isAlbum}}
+        {{partial 'album'}}
+      {{else}}
+        {{#if isArtist}}
+          {{partial 'artist'}}
         {{else}}
-          {{#if isArtist}}
-            {{partial 'artist'}}
-          {{else}}
-            {{partial 'song'}}
-          {{/if}}
+          {{partial 'song'}}
         {{/if}}
-      {{/each}}
-    </div>
-  </div>
+      {{/if}}
+      </li>
+    {{/each}}
+  </ul>
 </script>
 
