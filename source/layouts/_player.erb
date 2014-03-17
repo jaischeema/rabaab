@@ -11,10 +11,15 @@
       <span class="total">{{format-duration currentDuration}}</span>
     </div>
   </div>
-  <div class="buttons">
-    <a {{action 'previous'}} class="icon-to-start" id="previous-btn"></a>
-    <a {{action 'togglePlayPause'}} class="icon-play" id="play-btn"></a>
-    <a {{action 'next'}} class="icon-to-end" id="next-btn"></a>
+  <div class="row">
+    <div class="buttons col-xs-2">
+      <a {{action 'previous'}} class="icon-to-start" id="previous-btn"></a>
+      <a {{action 'togglePlayPause'}} {{bind-attr class="playButtonClass"}} id="play-btn"></a>
+      <a {{action 'next'}} class="icon-to-end" id="next-btn"></a>
+    </div>
+    <div class="col-xs-10">
+      <div class="progress"><span class="expand" {{bind-attr style="playProgressWidth"}}></span></div>
+    </div>
   </div>
 </div>
 </script>

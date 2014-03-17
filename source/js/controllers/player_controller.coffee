@@ -28,9 +28,9 @@ App.PlayerController = Ember.ObjectController.extend
   playButtonClass: ( ->
     state = @get('currentState')
     if state == PlayerState.playing
-      "glyphicon-pause"
+      "icon-pause"
     else if state == PlayerState.paused
-      "glyphicon-play"
+      "icon-play"
   ).property('currentState')
 
   enqueue: (song) ->
