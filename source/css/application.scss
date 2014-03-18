@@ -162,3 +162,31 @@ h1.header
   -moz-animation: fullexpand 10s ease-out;
   -webkit-animation: fullexpand 10s ease-out;
 }
+
+.playlist
+{
+  padding: 5px;
+  background-color: #000;
+
+  ul
+  {
+    margin-bottom: 0px;
+    list-style: none;
+    padding-left: 0px;
+    white-space: nowrap;
+    overflow-y: scroll;
+
+    li
+    {
+      display: inline-block;
+      margin: 0 5px;
+      background-color: #222;
+      padding: 10px 5px;
+      cursor: pointer;
+
+      .title { color: darkorange; }
+      .artist { color: #aaa }
+    }
+  }
+}
+

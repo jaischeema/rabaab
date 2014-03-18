@@ -1,36 +1,40 @@
 App.Playlist = Em.Object.extend
-  songIds: []
-  songs: {}
+  songs: []
   currentIndex: -1
 
-  currentSongID: ( ->
-    @get('songIds')[@get('currentIndex')]
-  ).property('songIds', 'currentIndex')
+  currentSong: ( ->
+    @get('songs')[@get('currentIndex')]
+  ).property('songs', 'currentIndex')
 
-  songTitle: (song_id) ->
-    @get('songs')[song_id].title
+  currentSongID: ( ->
+    @get('currentSong').id
+  ).property('currentSong')
 
   addSong: (song) ->
     if @hasSong(song)
       Ember.debug "Song is already in the playlist"
     else
-      @get('songs')[song.id] = song
-      @get('songIds').pushObject song.id
-      @set('currentIndex', 0) if @get('songIds').length == 1
+      @get('songs').pushObject song
+      @set('currentIndex', 0) if @get('songs').length == 1
+
+  songForID: (songID) ->
+    for _song in @get('songs')
+      return _song if _song.id == songID
+    return null
 
   hasSong: (song) ->
-    @get('songIds').indexOf(song.id) != -1
+    return @songForID(song.id)?
 
   next: ->
     current_index = @get('currentIndex')
-    if current_index != -1 and current_index < @get('songIds').length
+    if current_index != -1 and current_index < @get('songs').length
       current_index = current_index + 1
       @set('currentIndex', current_index)
-      return @get('songs')[@get('songIds')[current_index]]
+      return @get('songs')[current_index]
 
   previous: ->
     current_index = @get('currentIndex')
     if current_index != -1 and current_index > 0
       current_index = current_index - 1
       @set('currentIndex', current_index)
-      return @get('songs')[@get('songIds')[current_index]]
+      return @get('songs')[current_index]
