@@ -10,17 +10,22 @@
     = stylesheet_link_tag "/css/vendor/nprogress.css"
     = stylesheet_link_tag "application"
   %body
-    %nav.navbar.navbar-inverse.navbar-fixed-top
-      .container
-        %a.navbar-brand(href="/") Triangular
-        %ul.nav.navbar-nav
-          %li <a href='#'>Latest</a>
-          %li <a href='#'>Recent</a>
-          %li <a href='#'>Playlist</a>
-        %form.navbar-form.navbar-right(role="search")
-          %input.form-control.input-sm(type="text" placeholder="Search for album, song or artist...")
-    .content
-      .container
+    #main
+      #navigation
+        %a.brand(href='#') Rabaab
+        %ul.nav
+          %li
+            %a(href='#') <i class="icon-star-1"></i> Latest Albums
+          %li
+            %a(href='#') <i class="icon-clock"></i> Recently Played
+          %li
+            %a(href='#') <i class="icon-menu-1"></i> Playlists
+          %li
+            %a(href='#') <i class="icon-star-1"></i> Top Songs
+    #container
+      .search
+        %input.form-control.input-sm(type="text" placeholder="Search for album, song or artist...")
+      .content
         %h1.header Latest Albums
         %ul.list.list-albums
           %li
@@ -31,20 +36,25 @@
             %a
               %span.title Another casette
               %span.artist Ghaint Sharma
+    #playlist <div class='title'><i class='icon-list-add'></i> Playlist</div>
     %footer.footer
-      .container
-        .player
-          .row
-            .info.col-xs-8
-              .title Some title
-              .author Author
-            .timing.col-xs-4
-              %span.current 1:23
-              %span.total / 3:45
-          .buttons
-            %a#previous-btn.icon-to-start
-            %a#play-btn.icon-play
-            %a#next-btn.icon-to-end
+      .player
+        .info
+          .title Some title
+          .author Author
+        .primary-buttons
+          %a#previous-btn.icon-to-start
+          %a#play-btn.icon-play
+          %a#next-btn.icon-to-end
+        .progress
+          %span.current 0:11
+          .progress
+            %span.expand
+          %span.total 4:28
+        .secondary-buttons
+          %a#previous-btn.icon-to-start
+          %a#next-btn.icon-to-end
+        .volume
 
     -# javascript includes
     = javascript_include_tag  "/js/vendor/jquery-2.1.0.min.js"

@@ -1,45 +1,39 @@
 <script type="text/x-handlebars" id="_player_playing">
-<div class="container">
   <div class="player">
-    <div class="row">
-      <div class="info col-xs-8">
-        <div class="title">{{title}}</div>
-        <div class="author">{{artist_title}}</div>
-      </div>
-      <div class="timing col-xs-4">
-        <span class="current">{{format-duration currentPosition}}</span>
-        <span>/</span>
-        <span class="total">{{format-duration currentDuration}}</span>
-      </div>
+    <div class="info">
+      <div class="title">{{title}}</div>
+      <div class="author">{{artist_title}}</div>
     </div>
-    <div class="row">
-      <div class="buttons col-xs-2">
-        <a {{action 'previous'}} class="icon-to-start" id="previous-btn"></a>
-        <a {{action 'togglePlayPause'}} {{bind-attr class="playButtonClass"}} id="play-btn"></a>
-        <a {{action 'next'}} class="icon-to-end" id="next-btn"></a>
-      </div>
-      <div class="col-xs-10">
-        <div class="progress"><span class="expand" {{bind-attr style="playProgressWidth"}}></span></div>
-      </div>
+    <div class="primary-buttons">
+      <a {{action 'previous'}} class="icon-to-start" id="previous-btn"></a>
+      <a {{action 'togglePlayPause'}} {{bind-attr class="playButtonClass"}} id="play-btn"></a>
+      <a {{action 'next'}} class="icon-to-end" id="next-btn"></a>
+    </div>
+    <div class="progress">
+      <span class="current">{{format-duration currentPosition}}</span>
+      <div class="progress"><span class="expand" {{bind-attr style="playProgressWidth"}}></span></div>
+      <span class="total">{{format-duration currentDuration}}</span>
+    </div>
+    <div class="secondary-buttons">
+      <a {{action 'previous'}} class="icon-to-start" id="previous-btn"></a>
+      <a {{action 'next'}} class="icon-to-end" id="next-btn"></a>
+    </div>
+    <div class="volume">
+      <div class="progress"><span class="expand" {{bind-attr style="playProgressWidth"}}></span></div>
     </div>
   </div>
-</div>
 </script>
 
-<script type="text/x-handlebars" id="_playlist">
-<div class="playlist">
-  <ul>
-  {{#each song in playlist.songs}}
+<script type="text/x-handlebars" id="playlist">
+<ul class="song-list nav">
+  {{#each song in songs}}
     <li {{action 'playSong' song.id}}><span class="title">{{song.title}}</span> by <span class="artist">{{song.artist_title}}</span></li>
   {{/each}}
-  </ul>
-</div>
+</ul>
 </script>
 
 <script type="text/x-handlebars" id="_player_waiting">
-<div class="container">
   <span class="navbar-text">Please choose a song to play</span>
-</div>
 </script>
 
 <script type="text/x-handlebars" id="player">

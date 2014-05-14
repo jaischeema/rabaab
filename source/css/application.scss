@@ -94,7 +94,14 @@ body {
 }
 
 #playlist {
-  .title {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 20%;
+  background-color: #ddd;
+
+  .head-title {
     font-size: 18px;
     padding: 30px 20px;
     background-color: $secondaryColor;
@@ -102,22 +109,29 @@ body {
     color: white;
     text-align: center;
   }
+
+  ul.song-list li {
+    padding: 30px 20px;
+    font-size: 15px;
+    letter-spacing: 1.1px;
+    word-spacing: 5px;
+    text-transform: uppercase;
+    color: #222;
+
+    i {
+      color: $primaryColor; margin-right: 20px;
+    }
+
+    &:hover, &.active {
+      color: $primaryColor;
+      background-color: $primaryHighlightColor;
+    }
+  }
 }
 
 ::input-placeholder {
   color:red;
 }
-
-
-#playlist {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 20%;
-  background-color: #ddd;
-}
-
 
 footer {
   width: 100%;
@@ -163,43 +177,38 @@ h1.header {
   padding: 0 20px;
 }
 
-.player
-{
+.player {
+  overflow: auto;
+  padding: 10px 0;
+  .info, .primary-buttons, .secondary-buttons, .progress, .volume { float: left; }
+
   .info {
+    width: 15%;
+    padding: 0 0 0 20px;
     .title {
-      font-size: 17px;
-      font-weight: 700;
+      text-transform: uppercase;
+      color: white;
     }
 
     .author {
-      color: #777;
-    }
-  }
-  .buttons {
-    a {
-      color: #ddd;
-      font-size: 1.2em;
-      &:hover {
-        text-decoration: none;
-        color: white;
-      }
-
-      &#play-btn {
-        font-size: 2em;
-      }
+      color: #999;
     }
   }
 
-  .timing {
-    text-align: right;
-    .current {
-      font-weight: 700;
-      font-size: 18px;
-    }
+  .primary-buttons {
+    width: 10%;
+  }
 
-    .total {
-      color: #777;
-    }
+  .progress {
+    width: 45%;
+  }
+
+  .secondary-buttons {
+    width: 10%;
+  }
+
+  .volume {
+    width: 15%;
   }
 }
 
@@ -212,49 +221,61 @@ h1.header {
   padding-top: 150px;
 }
 
-.progress
-{
-	height: 5px;
-  background: #000;
-  padding: 0px;
-  margin-top: 22px;
-}
+// .progress
+// {
+// 	height: 5px;
+//   background: #000;
+//   padding: 0px;
+//   margin-top: 22px;
+// }
+//
+// .expand {
+//   width: 0%;
+//   height: 1px;
+//   margin: 2px 0;
+//   background: #2187e7;
+//   position: absolute;
+//   box-shadow: 0px 0px 10px 1px rgba(0,198,255,0.7);
+//   -moz-animation: fullexpand 10s ease-out;
+//   -webkit-animation: fullexpand 10s ease-out;
+// }
 
-.expand {
-  width: 0%;
-  height: 1px;
-  margin: 2px 0;
-  background: #2187e7;
-  position: absolute;
-  box-shadow: 0px 0px 10px 1px rgba(0,198,255,0.7);
-  -moz-animation: fullexpand 10s ease-out;
-  -webkit-animation: fullexpand 10s ease-out;
-}
-
-.playlist
-{
-  padding: 5px;
-  background-color: #000;
-
-  ul
-  {
-    margin-bottom: 0px;
-    list-style: none;
-    padding-left: 0px;
-    white-space: nowrap;
-    overflow-y: scroll;
-
-    li
-    {
-      display: inline-block;
-      margin: 0 5px;
-      background-color: #222;
-      padding: 10px 5px;
-      cursor: pointer;
-
-      .title { color: darkorange; }
-      .artist { color: #aaa }
-    }
-  }
-}
-
+//
+//
+//
+//   .info {
+//     .title {
+//       font-size: 17px;
+//       font-weight: 700;
+//     }
+//
+//     .author {
+//       color: #777;
+//     }
+//   }
+//   .buttons {
+//     a {
+//       color: #ddd;
+//       font-size: 1.2em;
+//       &:hover {
+//         text-decoration: none;
+//         color: white;
+//       }
+//
+//       &#play-btn {
+//         font-size: 2em;
+//       }
+//     }
+//   }
+//
+//   .timing {
+//     text-align: right;
+//     .current {
+//       font-weight: 700;
+//       font-size: 18px;
+//     }
+//
+//     .total {
+//       color: #777;
+//     }
+//   }

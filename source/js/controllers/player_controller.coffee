@@ -4,12 +4,13 @@
   paused:   3
 
 App.PlayerController = Ember.ObjectController.extend
-  playlist: App.Playlist.create()
+  needs: ['playlist']
   volume: 40
   currentState: PlayerState.waiting
   currentPosition: 0
   currentDuration: 0
   currentLoadPercent: 0.00
+  playlist: Ember.computed.alias("controllers.playlist")
 
   isPlaying: ( ->
     state = @get('currentState')
@@ -35,7 +36,7 @@ App.PlayerController = Ember.ObjectController.extend
 
   enqueue: (song) ->
     songObj = App.Song.create(song)
-    @get('playlist').addSong(songObj)
+    @get('playlist').enqueue(songObj)
     @resetCurrentModel(songObj) unless @get('model')?
 
   musicURLFetchedForModel: ( ->
