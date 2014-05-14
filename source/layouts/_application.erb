@@ -1,25 +1,30 @@
 <script type='text/x-handlebars' id='application'>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <a href="#" class="navbar-brand">Triangular</a>
-    <ul class="nav navbar-nav">
-      <li>{{#link-to "latest_albums"}}Latest Albums{{/link-to}}</li>
-      <li><a href="#">Recently Played</a></li>
-      <li><a href="#">Playlist</a></li>
-    </ul>
-    <div class="navbar-form navbar-right" role="search">
-      {{input type="text" value=query classNames="form-control input-sm" action="search" placeholder="Search for album, song or artist..."}}
+  <div id="main">
+    <div id="navigation">
+      <a href="#" class="brand">Rabaab</a>
+      <ul class="nav">
+        <li>{{#link-to "latest_albums"}}<i class="icon-star-1"></i> Latest Albums{{/link-to}}</li>
+        <li><a href="#"><i class="icon-clock"></i> Recently Played</a></li>
+        <li><a href="#"><i class="icon-menu-1"></i> Playlists</a></li>
+        <li><a href="#"><i class="icon-star-1"></i> Top Charts</a></li>
+      </ul>
+    </div>
+    <div id="container">
+      <div class="search">
+        {{input type="text" value=query classNames="form-control input-sm" action="search" placeholder="Search for album, song or artist..."}}
+      </div>
+      <div class="content">
+        {{outlet}}
+      </div>
+    </div>
+    <div id="playlist">
+      <div class='title'><i class='icon-list-add'></i> Playlist</div>
+      {{partial 'playlist'}}
     </div>
   </div>
-</nav>
-<div class="content">
-  <div class="container">
-    {{outlet}}
-  </div>
-</div>
-<footer class="footer">
-  {{render 'player'}}
-</footer>
+  <footer class="footer">
+    {{render 'player'}}
+  </footer>
 </script>
 
 <script type="text/x-handlebars" id="loading">

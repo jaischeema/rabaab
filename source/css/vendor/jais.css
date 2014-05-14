@@ -59,7 +59,7 @@
 .icon-ok-1:before { content: '\e80e'; } /* '' */
 .icon-cancel-1:before { content: '\e80f'; } /* '' */
 .icon-bell:before { content: '\e810'; } /* '' */
-.icon-clock-1:before { content: '\e818'; } /* '' */
+.icon-clock:before { content: '\e818'; } /* '' */
 .icon-play:before { content: '\e809'; } /* '' */
 .icon-pause:before { content: '\e80a'; } /* '' */
 .icon-stop:before { content: '\e80b'; } /* '' */
