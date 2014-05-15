@@ -3,7 +3,7 @@ App.PlaylistController = Ember.ObjectController.extend
 
   init: ->
     @_super()
-    @set('model', App.Playlist.create())
+    @set('model', App.Playlist.createFromLocalStorage())
 
   loadPlaylist: (id) -> console.log("Loaded playlist #{id}")
 
