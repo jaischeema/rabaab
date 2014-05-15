@@ -53,7 +53,8 @@ body {
     color: #222;
 
     i {
-      color: $primaryColor; margin-right: 20px;
+      color: lighten($primaryColor, 20%);
+      margin-right: 20px;
     }
 
     &:hover, &.active {
@@ -110,20 +111,24 @@ body {
     text-align: center;
   }
 
-  ul.song-list li {
-    padding: 30px 20px;
-    font-size: 15px;
+  .song-list li {
+    padding: 15px 20px;
+    font-size: 13px;
     letter-spacing: 1.1px;
     word-spacing: 5px;
     text-transform: uppercase;
     color: #222;
 
-    i {
-      color: $primaryColor; margin-right: 20px;
+    .title {
+      display: block;
+    }
+
+    .artist {
+      color: darken($primaryColor, 20%);
+      font-size: 11px;
     }
 
     &:hover, &.active {
-      color: $primaryColor;
       background-color: $primaryHighlightColor;
     }
   }

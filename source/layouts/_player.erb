@@ -27,7 +27,10 @@
 <script type="text/x-handlebars" id="playlist">
 <ul class="song-list nav">
   {{#each song in songs}}
-    <li {{action 'playSong' song.id}}><span class="title">{{song.title}}</span> by <span class="artist">{{song.artist_title}}</span></li>
+    <li {{action 'playSong' song.id}}>
+      <span class="title">{{song.title}}</span>
+      <span class="artist">{{song.artist_title}}</span>
+    </li>
   {{/each}}
 </ul>
 </script>
