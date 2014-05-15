@@ -9,30 +9,25 @@
       <a {{action 'togglePlayPause'}} {{bind-attr class="playButtonClass"}} id="play-btn"></a>
       <a {{action 'next'}} class="icon-to-end" id="next-btn"></a>
     </div>
-    <div class="progress">
-      <span class="current">{{format-duration currentPosition}}</span>
-      <div class="progress"><span class="expand" {{bind-attr style="playProgressWidth"}}></span></div>
-      <span class="total">{{format-duration currentDuration}}</span>
-    </div>
-    <div class="secondary-buttons">
-      <a {{action 'previous'}} class="icon-to-start" id="previous-btn"></a>
-      <a {{action 'next'}} class="icon-to-end" id="next-btn"></a>
-    </div>
-    <div class="volume">
-      <div class="progress"><span class="expand" {{bind-attr style="playProgressWidth"}}></span></div>
+    <div class="timer">
+      <div class="current">{{format-duration currentPosition}}</div>
+      <div class="play-time slider"><span class="expand" {{bind-attr style="playProgressWidth"}}></span></div>
+      <div class="total">{{format-duration currentDuration}}</div>
     </div>
   </div>
 </script>
 
 <script type="text/x-handlebars" id="playlist">
-<ul class="song-list nav">
-  {{#each song in songs}}
-    <li {{action 'playSong' song.id}}>
-      <span class="title">{{song.title}}</span>
-      <span class="artist">{{song.artist_title}}</span>
-    </li>
-  {{/each}}
-</ul>
+<div class="wrapper">
+  <ul class="song-list nav">
+    {{#each song in songs}}
+      <li {{action 'playSong' song.id}}>
+        <span class="title">{{song.title}}</span>
+        <span class="artist">{{song.artist_title}}</span>
+      </li>
+    {{/each}}
+  </ul>
+</div>
 </script>
 
 <script type="text/x-handlebars" id="_player_waiting">

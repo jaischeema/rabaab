@@ -11,10 +11,17 @@ $highDarkBackgroundColor: #1B1D25;
 $backgroundColor: #ffffff;
 $placeholderColor: #ddd;
 
+@mixin truncate-text {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 body {
   background-color: $backgroundColor;
   font-family: 'Lato', sans-serif;
-  padding-bottom: 150px;
+  padding-bottom: 60px;
 }
 
 #main {
@@ -114,18 +121,20 @@ body {
   .song-list li {
     padding: 15px 20px;
     font-size: 13px;
-    letter-spacing: 1.1px;
-    word-spacing: 5px;
+    letter-spacing: 0.9px;
+    word-spacing: 2px;
     text-transform: uppercase;
     color: #222;
 
     .title {
       display: block;
+      @include truncate-text;
     }
 
     .artist {
       color: darken($primaryColor, 20%);
       font-size: 11px;
+      @include truncate-text;
     }
 
     &:hover, &.active {
@@ -142,7 +151,7 @@ footer {
   width: 100%;
   position: fixed;
   bottom: 0;
-  background-color: $highDarkBackgroundColor;
+  background-color: rgba($highDarkBackgroundColor, 0.95);
   color: #ffffff;
 }
 
@@ -160,6 +169,8 @@ footer {
       display: block;
       cursor: default;
       color: #222;
+      @include truncate-text;
+
       span.artist {
         float: right;
         color: #888;
@@ -185,7 +196,7 @@ h1.header {
 .player {
   overflow: auto;
   padding: 10px 0;
-  .info, .primary-buttons, .secondary-buttons, .progress, .volume { float: left; }
+  .info, .primary-buttons, .secondary-buttons, .timer, .volume { float: left; }
 
   .info {
     width: 15%;
@@ -193,19 +204,76 @@ h1.header {
     .title {
       text-transform: uppercase;
       color: white;
+      @include truncate-text;
     }
 
     .author {
       color: #999;
+      @include truncate-text;
     }
   }
 
   .primary-buttons {
     width: 10%;
+    margin-left: 5%;
+    a {
+      color: white;
+      display: inline-block;
+      text-align: center;
+      width: 28%;
+      font-size: 18px;
+      vertical-align: middle;
+      padding-top: 2px;
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      &#play-btn {
+        border: 1px solid #eee;
+        border-radius: 30px;
+        font-size: 22px;
+      }
+    }
   }
 
-  .progress {
-    width: 45%;
+  .timer {
+    width: 65%;
+    margin-left: 5%;
+    overflow: auto;
+    margin-top: 15px;
+    div { float: left; }
+
+    .current, .total {
+      width: 10%;
+      font-size: 11px;
+    }
+
+    .current {
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    .total {
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    .slider {
+      width: 80%;
+      height: 6px;
+      margin-top: 5px;
+      border-radius: 3px;
+      background-color: $darkBackgroundColor;
+
+      span.expand {
+        width: 99.9668557588119%;
+        height: 6px;
+        background-color: $primaryColor;
+        display: block;
+        border-radius: 3px;
+      }
+    }
   }
 
   .secondary-buttons {
@@ -225,62 +293,3 @@ h1.header {
   font-size: 4em;
   padding-top: 150px;
 }
-
-// .progress
-// {
-// 	height: 5px;
-//   background: #000;
-//   padding: 0px;
-//   margin-top: 22px;
-// }
-//
-// .expand {
-//   width: 0%;
-//   height: 1px;
-//   margin: 2px 0;
-//   background: #2187e7;
-//   position: absolute;
-//   box-shadow: 0px 0px 10px 1px rgba(0,198,255,0.7);
-//   -moz-animation: fullexpand 10s ease-out;
-//   -webkit-animation: fullexpand 10s ease-out;
-// }
-
-//
-//
-//
-//   .info {
-//     .title {
-//       font-size: 17px;
-//       font-weight: 700;
-//     }
-//
-//     .author {
-//       color: #777;
-//     }
-//   }
-//   .buttons {
-//     a {
-//       color: #ddd;
-//       font-size: 1.2em;
-//       &:hover {
-//         text-decoration: none;
-//         color: white;
-//       }
-//
-//       &#play-btn {
-//         font-size: 2em;
-//       }
-//     }
-//   }
-//
-//   .timing {
-//     text-align: right;
-//     .current {
-//       font-weight: 700;
-//       font-size: 18px;
-//     }
-//
-//     .total {
-//       color: #777;
-//     }
-//   }
