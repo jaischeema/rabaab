@@ -17,4 +17,7 @@ App.PlaylistController = Ember.ObjectController.extend
   actions:
     playSong: (song_id) ->
       song = @getSongForPlaying(song_id)
-      @get('controllers.player').resetCurrentModel(song)
+      @get('controllers.player').resetCurrentModel(song) if song?
+
+    removeSong: (song_id) ->
+      @get('model').removeSong(song_id)

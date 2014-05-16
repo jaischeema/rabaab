@@ -87,7 +87,7 @@ App.PlayerController = Ember.ObjectController.extend
 
     playSong: (song_id) ->
       song = @get('playlist').getSongForPlaying(song_id)
-      @resetCurrentModel(song)
+      @resetCurrentModel(song) if song?
 
     next: ->
       next_song = @get('playlist').next()

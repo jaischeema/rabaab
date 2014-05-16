@@ -24,6 +24,7 @@
       <li {{action 'playSong' song.id}}>
         <span class="title">{{song.title}}</span>
         <span class="artist">{{song.artist_title}}</span>
+        <span class="remove" {{action 'removeSong' song.id bubbles=false}}>&times;</span>
       </li>
     {{/each}}
   </ul>

@@ -152,9 +152,27 @@ header {
       @include truncate-text;
     }
 
+    .remove {
+      position: absolute;
+      display: block;
+      right: 0;
+      padding-right: 20px;
+      top: 12%;
+      font-size: 28px;
+      visibility: hidden;
+      color: #999;
+      cursor: default;
+
+      &:hover {
+        color: #222;
+      }
+    }
+
     &:hover, &.active {
       background-color: $primaryHighlightColor;
     }
+
+    &:hover .remove { visibility: visible; }
   }
 }
 

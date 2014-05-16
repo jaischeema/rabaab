@@ -22,10 +22,23 @@ App.Playlist = Em.Object.extend
       @set('currentIndex', 0) if @get('songs').length == 1
       @save()
 
+  removeSong: (songID) ->
+    song = @songForID(songID)
+    if song?
+      index = @get('songs').indexOf(song)
+      currentIndex = @get('currentIndex')
+      @set('currentIndex', currentIndex - 1) if index <= currentIndex
+      @get('songs').splice(index,1)
+      @save()
+
   getSongForPlaying: (songID) ->
     song = @songForID(songID)
     if song?
-      @set('currentIndex', @get('songs').indexOf(song))
+      index = @get('songs').indexOf(song)
+      if index == @get('currentIndex')
+        return null
+      else
+        @set('currentIndex', index)
     return song
 
   songForID: (songID) ->
