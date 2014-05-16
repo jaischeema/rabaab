@@ -86,7 +86,7 @@ App.PlayerController = Ember.ObjectController.extend
         Ember.debug "No sound present"
 
     playSong: (song_id) ->
-      song = @get('playlist').songForID(song_id)
+      song = @get('playlist').getSongForPlaying(song_id)
       @resetCurrentModel(song)
 
     next: ->

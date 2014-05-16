@@ -22,6 +22,12 @@ App.Playlist = Em.Object.extend
       @set('currentIndex', 0) if @get('songs').length == 1
       @save()
 
+  getSongForPlaying: (songID) ->
+    song = @songForID(songID)
+    if song?
+      @set('currentIndex', @get('songs').indexOf(song))
+    return song
+
   songForID: (songID) ->
     for _song in @get('songs')
       return _song if _song.id == songID
