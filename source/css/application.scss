@@ -18,38 +18,79 @@ $placeholderColor: #ddd;
   text-overflow: ellipsis;
 }
 
+
 body {
   background-color: $backgroundColor;
   font-family: 'Lato', sans-serif;
   padding-bottom: 60px;
 }
 
+header {
+  position:fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .logo {
+    width: 20%;
+    float: left;
+
+    a.brand {
+      font-family: "Pacifico";
+      display: block;
+      background-color: $primaryColor;
+      padding: 22px 30px;
+      color: white;
+      font-size: 30px;
+      text-align: center;
+
+      &:hover { text-decoration: none; }
+    }
+  }
+
+  .search {
+    width: 60%;
+    float: left;
+    background-color: #fff;
+
+    input.input-sm {
+      height: 86px;
+      padding: 15px 20px;
+      font-size: 20px;
+      font-weight: 200;
+      outline: none;
+      box-shadow:none !important;
+      border-radius: 0px;
+      border: 0px solid red;
+      border-bottom: 1px solid $lightBackgroundColor;
+    }
+  }
+
+  .playlist-title {
+    font-size: 18px;
+    padding: 30px 20px;
+    background-color: $secondaryColor;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+  }
+
+}
+
 #main {
-  min-height:100%;
+  margin-top: 85px;
   width:100%;
   position:relative;
-  display:inline-block;
 }
 
 #navigation {
   position: fixed;
   bottom: 0;
   left: 0;
-  top: 0;
+  top: 85px;
   width: 20%;
   background-color: $lightBackgroundColor;
-
-  a.brand {
-    font-family: "Pacifico";
-    display: block;
-    background-color: $primaryColor;
-    padding: 22px 30px;
-    color: white;
-    font-size: 30px;
-    text-align: center;
-
-    &:hover { text-decoration: none; }
-  }
 
   ul li a {
     padding: 30px 20px;
@@ -72,51 +113,25 @@ body {
 }
 
 #container {
+  position: relative;
   margin-left: 20%;
   margin-right: 20%;
-  position: relative;
+  overflow: auto;
 
   .content {
-    padding: 85px 0 20px;
-  }
-
-  .search {
-    position: fixed;
-    top: 0;
-    left: 20%;
-    right: 20%;
-    background-color: #fff;
-
-    input.input-sm {
-      height: 86px;
-      padding: 15px 20px;
-      font-size: 20px;
-      font-weight: 200;
-      outline: none;
-      box-shadow:none !important;
-      border-radius: 0px;
-      border: 0px solid red;
-      border-bottom: 1px solid $lightBackgroundColor;
-    }
+    padding: 0 0 20px;
   }
 }
 
 #playlist {
+  overflow: auto;
   position: fixed;
-  top: 0;
+  top: 85px;
   right: 0;
   bottom: 0;
   width: 20%;
+  padding-bottom: 60px;
   background-color: #ddd;
-
-  .head-title {
-    font-size: 18px;
-    padding: 30px 20px;
-    background-color: $secondaryColor;
-    text-transform: uppercase;
-    color: white;
-    text-align: center;
-  }
 
   .song-list li {
     padding: 15px 20px;

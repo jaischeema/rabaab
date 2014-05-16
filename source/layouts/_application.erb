@@ -1,7 +1,17 @@
 <script type='text/x-handlebars' id='application'>
+  <header>
+    <div class="logo">
+      <a href="#" class="brand">Rabaab</a>
+    </div>
+    <div class="search">
+      {{input type="text" value=query classNames="form-control input-sm" action="search" placeholder="Search for album, song or artist..."}}
+    </div>
+    <div class='playlist-title'>
+      <i class='icon-list-add'></i> Playlist
+    </div>
+  </header>
   <div id="main">
     <div id="navigation">
-      <a href="#" class="brand">Rabaab</a>
       <ul class="nav">
         <li>{{#link-to "latest_albums"}}<i class="icon-star-1"></i> Latest Albums{{/link-to}}</li>
         <li><a href="#"><i class="icon-clock"></i> Recently Played</a></li>
@@ -10,15 +20,11 @@
       </ul>
     </div>
     <div id="container">
-      <div class="search">
-        {{input type="text" value=query classNames="form-control input-sm" action="search" placeholder="Search for album, song or artist..."}}
-      </div>
       <div class="content">
         {{outlet}}
       </div>
     </div>
     <div id="playlist">
-      <div class='head-title'><i class='icon-list-add'></i> Playlist</div>
       {{render 'playlist'}}
     </div>
   </div>
