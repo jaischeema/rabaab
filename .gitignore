@@ -1,6 +1,6 @@
-/.bundle
-/build
-/.sass-cache
 .DS_Store
-/source/test/*.mp3
-.cache
+node_modules/
+dist/
+.sass-cache/
+app/bower_components/
+.cache/

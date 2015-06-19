@@ -1,7 +1,7 @@
-Ember Music Player
-====================
+Music Player
+============
 
-A music player based on ember.js with coffeescript and sass.
+A music player based on react.js.
 
 LICENSE
 -------
