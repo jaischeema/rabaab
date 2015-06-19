@@ -1,27 +1,331 @@
 $icon-font-path: "/fonts/bootstrap/";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "jais";
 
-body {
-  background: #fafafa;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #333;
+$primaryColor: #EA2E49;
+$primaryHighlightColor: #EAD7DA;
+$secondaryColor: #77C4D3;
+$lightBackgroundColor: #EAEAEA;
+$darkBackgroundColor: #333745;
+$highDarkBackgroundColor: #1B1D25;
+$backgroundColor: #ffffff;
+$placeholderColor: #ddd;
+
+@mixin truncate-text {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.hero-unit {
-  margin: 50px auto;
-  width: 400px;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
-  background-color: #eee;
-  border-radius: 6px;
-  padding: 60px;
 
-  h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+body {
+  background-color: $backgroundColor;
+  font-family: 'Lato', sans-serif;
+  padding-bottom: 60px;
+  padding-top: 60px;
+}
+
+header {
+  position:fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .logo {
+    width: 20%;
+    float: left;
+
+    a.brand {
+      font-family: "Pacifico";
+      display: block;
+      background-color: $primaryColor;
+      padding: 22px 30px;
+      color: white;
+      font-size: 30px;
+      text-align: center;
+
+      &:hover { text-decoration: none; }
+    }
   }
+
+  .search {
+    width: 60%;
+    float: left;
+    background-color: #fff;
+
+    input.input-sm {
+      height: 86px;
+      padding: 15px 20px;
+      font-size: 20px;
+      font-weight: 200;
+      outline: none;
+      box-shadow:none !important;
+      border-radius: 0px;
+      border: 0px solid red;
+      border-bottom: 1px solid $lightBackgroundColor;
+    }
+  }
+
+  .playlist-title {
+    font-size: 18px;
+    padding: 30px 20px;
+    background-color: $secondaryColor;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+  }
+
+}
+
+#main {
+  margin-top: 85px;
+  width:100%;
+  position:relative;
+}
+
+#navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 85px;
+  width: 20%;
+  background-color: $lightBackgroundColor;
+
+  ul li a {
+    padding: 30px 20px;
+    font-size: 15px;
+    letter-spacing: 1.1px;
+    word-spacing: 5px;
+    text-transform: uppercase;
+    color: #222;
+
+    i {
+      color: lighten($primaryColor, 20%);
+      margin-right: 20px;
+    }
+
+    &:hover, &.active {
+      color: $primaryColor;
+      background-color: $primaryHighlightColor;
+    }
+  }
+}
+
+#container {
+  position: relative;
+  margin-left: 20%;
+  margin-right: 20%;
+  overflow: auto;
+
+  .content {
+    padding: 0 0 20px;
+  }
+}
+
+#playlist {
+  overflow: auto;
+  position: fixed;
+  top: 85px;
+  right: 0;
+  bottom: 0;
+  width: 20%;
+  padding-bottom: 60px;
+  background-color: #ddd;
+
+  .song-list li {
+    padding: 15px 20px;
+    font-size: 13px;
+    letter-spacing: 0.9px;
+    word-spacing: 2px;
+    text-transform: uppercase;
+    color: #222;
+
+    .title {
+      display: block;
+      @include truncate-text;
+    }
+
+    .artist {
+      color: darken($primaryColor, 20%);
+      font-size: 11px;
+      @include truncate-text;
+    }
+
+    .remove {
+      position: absolute;
+      display: block;
+      right: 0;
+      padding-right: 20px;
+      top: 12%;
+      font-size: 28px;
+      visibility: hidden;
+      color: #999;
+      cursor: default;
+
+      &:hover {
+        color: #222;
+      }
+    }
+
+    &:hover, &.active {
+      background-color: $primaryHighlightColor;
+    }
+
+    &:hover .remove { visibility: visible; }
+  }
+}
+
+::input-placeholder {
+  color:red;
+}
+
+footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: rgba($highDarkBackgroundColor, 0.95);
+  color: #ffffff;
+}
+
+
+.list {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+
+    a {
+      padding: 20px;
+      display: block;
+      cursor: default;
+      color: #222;
+      @include truncate-text;
+
+      span.artist {
+        float: right;
+        color: #888;
+      }
+
+      &:hover {
+        text-decoration: none;
+        background-color: lighten($secondaryColor, 33%);
+      }
+    }
+  }
+}
+
+h1.header {
+  font-family: Lato;
+  font-size: 2em;
+  margin: 0.67em 0;
+  font-weight: 200;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
+.player {
+  overflow: auto;
+  padding: 10px 0;
+  .info, .primary-buttons, .secondary-buttons, .timer, .volume { float: left; }
+
+  .info {
+    width: 15%;
+    padding: 0 0 0 20px;
+    .title {
+      text-transform: uppercase;
+      color: white;
+      @include truncate-text;
+    }
+
+    .author {
+      color: #999;
+      @include truncate-text;
+    }
+  }
+
+  .primary-buttons {
+    width: 10%;
+    margin-left: 5%;
+    a {
+      color: white;
+      display: inline-block;
+      text-align: center;
+      width: 28%;
+      font-size: 18px;
+      vertical-align: middle;
+      padding-top: 2px;
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      &#play-btn {
+        border: 1px solid #eee;
+        border-radius: 30px;
+        font-size: 22px;
+      }
+    }
+  }
+
+  .timer {
+    width: 65%;
+    margin-left: 5%;
+    overflow: auto;
+    margin-top: 15px;
+    div { float: left; }
+
+    .current, .total {
+      width: 10%;
+      font-size: 11px;
+    }
+
+    .current {
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    .total {
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    .slider {
+      width: 80%;
+      height: 6px;
+      margin-top: 5px;
+      border-radius: 3px;
+      background-color: $darkBackgroundColor;
+
+      span.expand {
+        width: 99.9668557588119%;
+        height: 6px;
+        background-color: $primaryColor;
+        display: block;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .secondary-buttons {
+    width: 10%;
+  }
+
+  .volume {
+    width: 15%;
+  }
+}
+
+.loading
+{
+  width: 100%;
+  height:100%;
+  text-align: center;
+  font-size: 4em;
+  padding-top: 150px;
 }
 
 .browsehappy {
