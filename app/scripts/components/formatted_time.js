@@ -15,7 +15,7 @@ export default class extends React.Component {
     var seconds = time % 60;
     time = (time - seconds) / 60;
     var mins = time % 60;
-    if(seconds > 10) {
+    if(seconds >= 10) {
       return `${mins}:${seconds}`;
     } else {
       return `${mins}:0${seconds}`;
