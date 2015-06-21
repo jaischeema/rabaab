@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React               from 'react';
+import { Link }            from 'react-router';
+import Spinner             from './spinner';
 import { PlaylistActions } from '../playlist';
 
 export default class extends React.Component {
@@ -32,7 +33,14 @@ export default class extends React.Component {
 
   renderContent() {
     if(this.state.loading) {
-      return (<h3>Loading......</h3>);
+      return (
+        <Spinner
+          config={{
+            width: 12,
+            radius: 25,
+          }}
+        />
+      );
     } else {
       return (
         <ul>
