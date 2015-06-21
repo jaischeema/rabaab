@@ -5,14 +5,8 @@ import HashHistory from 'react-router/lib/HashHistory';
 import Rabaab from './components/rabaab';
 import LatestAlbums from './components/latest_albums';
 import Album from './components/album';
+import Search from './components/search';
 
-class Search extends React.Component {
-  render() {
-    return (
-      <h1>Search</h1>
-    );
-  }
-}
 
 React.render((
   <Router history={HashHistory}>
