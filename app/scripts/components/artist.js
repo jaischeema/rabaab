@@ -1,6 +1,7 @@
-import React               from 'react';
-import Spinner             from './spinner';
-import AlbumList           from './album_list';
+import React      from 'react';
+import Spinner    from './spinner';
+import AlbumList  from './album_list';
+import PageHeader from './page_header';
 
 export default class extends React.Component {
   constructor(props) {
@@ -20,11 +21,7 @@ export default class extends React.Component {
   render() {
     return (
       <div className="artist">
-        <div className="page-header">
-          <h1>
-            {this.state.artist.title}
-          </h1>
-        </div>
+        <PageHeader title={this.state.artist.title} />
         {this.renderContent()}
       </div>
     );
