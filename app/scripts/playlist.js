@@ -6,14 +6,15 @@ var PlaylistActions = Reflux.createActions([
   "next",
   "previous",
   "add",
-  "remove"
+  "remove",
+  "playSong"
 ]);
 
 var Playlist = Reflux.createStore({
   init: function() {
-    this.songs        = [];
-    this.currentIndex = null;
-    this.playing      = false;
+    this.songs        = this.getFromLocalStorage();
+    this.currentIndex = (this.songs.length == 0 ? null : 0);
+    this.playing      = true;
     this.listenToMany(PlaylistActions)
   },
 
@@ -28,6 +29,25 @@ var Playlist = Reflux.createStore({
     }
   },
 
+  onPlaySong: function(song) {
+    var songIndex = null;
+    for(var index in this.songs) {
+      if(this.songs[index] == song) {
+        songIndex = index;
+        break;
+      }
+    }
+    if(songIndex !== null) {
+      this.currentIndex = songIndex;
+    } else {
+      this.songs.push(song);
+      this.currentIndex = this.songs.length - 1;
+    }
+    this.playing = true;
+    this.saveToLocalStorage();
+    this.trigger();
+  },
+
   onPause: function() {
     if(this.currentIndex !== null && this.playing) {
       this.playing = false;
@@ -36,7 +56,6 @@ var Playlist = Reflux.createStore({
   },
 
   onNext: function() {
-    debugger
     if(this.currentIndex !== null && this.songs.length > (this.currentIndex + 1)) {
       this.currentIndex += 1;
       this.trigger();
@@ -44,7 +63,6 @@ var Playlist = Reflux.createStore({
   },
 
   onPrevious: function() {
-    debugger
     if(this.currentIndex !== null && this.currentIndex > 0) {
       this.currentIndex -= 1;
       this.trigger();
@@ -62,10 +80,35 @@ var Playlist = Reflux.createStore({
       this.currentIndex = 0;
       this.playing      = true;
     }
+    this.saveToLocalStorage();
     this.trigger();
   },
 
   onRemove: function(song) {
+    for(var index in this.songs) {
+      if(this.songs[index] == song) {
+        this.songs.splice(index, 1);
+        if(this.currentIndex == index && this.songs.length == 0) {
+          this.currentIndex = null;
+        }
+        this.saveToLocalStorage();
+        this.trigger();
+        return
+      }
+    }
+  },
+
+  saveToLocalStorage: function() {
+    localStorage.setItem("playlist", JSON.stringify(this.songs));
+  },
+
+  getFromLocalStorage: function() {
+    var data = localStorage.getItem("playlist");
+    if(data !== undefined && data !== null) {
+      return JSON.parse(data);
+    } else {
+      return [];
+    }
   }
 });
 
