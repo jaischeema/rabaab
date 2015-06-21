@@ -1,15 +1,6 @@
 $icon-font-path: "/fonts/bootstrap/";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
-@import "jais";
-
-$primaryColor: #EA2E49;
-$primaryHighlightColor: #EAD7DA;
-$secondaryColor: #77C4D3;
-$lightBackgroundColor: #EAEAEA;
-$darkBackgroundColor: #333745;
-$highDarkBackgroundColor: #1B1D25;
-$backgroundColor: #ffffff;
-$placeholderColor: #ddd;
+@import "fonts";
 
 @mixin truncate-text {
   width: 100%;
@@ -18,319 +9,166 @@ $placeholderColor: #ddd;
   text-overflow: ellipsis;
 }
 
-
 body {
-  background-color: $backgroundColor;
   font-family: 'Lato', sans-serif;
-  padding-bottom: 60px;
   padding-top: 60px;
 }
 
-header {
-  position:fixed;
-  z-index: 1000;
+.rabaab {
+  width: 100%;
+  height: 100%;
+}
+
+.player-controls {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  background-color: #eee;
+
+  .controls {
+    padding: 15px 30px;
+
+    i {
+      font-size: 30px;
+      color: #aaa;
+      margin-right: 15px;
+
+      &.play-button {
+        font-size: 35px;
+      }
+    }
+  }
+}
+
+.header {
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  overflow: auto;
+  background-color: wheat;
+  border-bottom: 1px solid #eee;
+  z-index: 100;
 
-  .logo {
-    width: 20%;
+  .brand {
+    display: inline-block;
+    font-size: 24px;
+    padding: 10px 20px;
+    width: 15%;
     float: left;
-
-    a.brand {
-      font-family: "Pacifico";
-      display: block;
-      background-color: $primaryColor;
-      padding: 22px 30px;
-      color: white;
-      font-size: 30px;
-      text-align: center;
-
-      &:hover { text-decoration: none; }
-    }
-  }
-
-  .search {
-    width: 60%;
-    float: left;
-    background-color: #fff;
-
-    input.input-sm {
-      height: 86px;
-      padding: 15px 20px;
-      font-size: 20px;
-      font-weight: 200;
-      outline: none;
-      box-shadow:none !important;
-      border-radius: 0px;
-      border: 0px solid red;
-      border-bottom: 1px solid $lightBackgroundColor;
-    }
-  }
-
-  .playlist-title {
-    font-size: 18px;
-    padding: 30px 20px;
-    background-color: $secondaryColor;
-    text-transform: uppercase;
+    text-decoration: none;
+    font-family: "Source Sans Pro";
     color: white;
-    text-align: center;
-  }
-
-}
-
-#main {
-  margin-top: 85px;
-  width:100%;
-  position:relative;
-}
-
-#navigation {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  top: 85px;
-  width: 20%;
-  background-color: $lightBackgroundColor;
-
-  ul li a {
-    padding: 30px 20px;
-    font-size: 15px;
-    letter-spacing: 1.1px;
-    word-spacing: 5px;
+    background-color: tomato;
     text-transform: uppercase;
-    color: #222;
+    border-bottom: 1px solid tomato;
+  }
 
-    i {
-      color: lighten($primaryColor, 20%);
-      margin-right: 20px;
-    }
-
-    &:hover, &.active {
-      color: $primaryColor;
-      background-color: $primaryHighlightColor;
-    }
+  .search-bar {
+    width: 85%;
+    border: 0px;
+    font-size: 22px;
+    outline: 0px;
+    padding: 12px;
+    font-weight: 200;
   }
 }
 
-#container {
-  position: relative;
-  margin-left: 20%;
-  margin-right: 20%;
-  overflow: auto;
-
-  .content {
-    padding: 0 0 20px;
-  }
-}
-
-#playlist {
-  overflow: auto;
+.playlist-section {
   position: fixed;
-  top: 85px;
+  top: 56px;
   right: 0;
-  bottom: 0;
-  width: 20%;
-  padding-bottom: 60px;
+  bottom: 70px;
   background-color: #ddd;
+  color: white;
 
-  .song-list li {
-    padding: 15px 20px;
-    font-size: 13px;
-    letter-spacing: 0.9px;
-    word-spacing: 2px;
+  h2 {
+    margin: 0px -15px;
+    background-color: rgb(34, 34, 34);
+    padding: 12px 10px;
+    font-size: 20px;
     text-transform: uppercase;
-    color: #222;
-
-    .title {
-      display: block;
-      @include truncate-text;
-    }
-
-    .artist {
-      color: darken($primaryColor, 20%);
-      font-size: 11px;
-      @include truncate-text;
-    }
-
-    .remove {
-      position: absolute;
-      display: block;
-      right: 0;
-      padding-right: 20px;
-      top: 12%;
-      font-size: 28px;
-      visibility: hidden;
-      color: #999;
-      cursor: default;
-
-      &:hover {
-        color: #222;
-      }
-    }
-
-    &:hover, &.active {
-      background-color: $primaryHighlightColor;
-    }
-
-    &:hover .remove { visibility: visible; }
+    color: rgb(170, 170, 170);
   }
-}
 
-::input-placeholder {
-  color:red;
-}
-
-footer {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  background-color: rgba($highDarkBackgroundColor, 0.95);
-  color: #ffffff;
-}
-
-
-.list {
-  list-style: none;
-  padding-left: 0;
-
-  li {
-    font-size: 15px;
-    border-bottom: 1px solid #eee;
+  .songs {
+    margin: 0 -15px;
 
     a {
-      padding: 20px;
+      cursor: pointer;
       display: block;
-      cursor: default;
-      color: #222;
-      @include truncate-text;
+      padding: 5px 25px 5px 10px;
+      color: #666;
+      text-decoration: none;
+      position: relative;
 
-      span.artist {
+      i {
+        display: none;
         float: right;
-        color: #888;
+        position: absolute;
+        top: 30%;
+        right: 10px;
       }
 
       &:hover {
-        text-decoration: none;
-        background-color: lighten($secondaryColor, 33%);
-      }
-    }
-  }
-}
-
-h1.header {
-  font-family: Lato;
-  font-size: 2em;
-  margin: 0.67em 0;
-  font-weight: 200;
-  text-transform: uppercase;
-  padding: 0 20px;
-}
-
-.player {
-  overflow: auto;
-  padding: 10px 0;
-  .info, .primary-buttons, .secondary-buttons, .timer, .volume { float: left; }
-
-  .info {
-    width: 15%;
-    padding: 0 0 0 20px;
-    .title {
-      text-transform: uppercase;
-      color: white;
-      @include truncate-text;
-    }
-
-    .author {
-      color: #999;
-      @include truncate-text;
-    }
-  }
-
-  .primary-buttons {
-    width: 10%;
-    margin-left: 5%;
-    a {
-      color: white;
-      display: inline-block;
-      text-align: center;
-      width: 28%;
-      font-size: 18px;
-      vertical-align: middle;
-      padding-top: 2px;
-
-      &:hover {
-        text-decoration: none;
+        i {
+          display: block;
+        }
       }
 
-      &#play-btn {
-        border: 1px solid #eee;
-        border-radius: 30px;
-        font-size: 22px;
+      &.active {
+        color: tomato;
       }
-    }
-  }
 
-  .timer {
-    width: 65%;
-    margin-left: 5%;
-    overflow: auto;
-    margin-top: 15px;
-    div { float: left; }
-
-    .current, .total {
-      width: 10%;
-      font-size: 11px;
-    }
-
-    .current {
-      text-align: right;
-      padding-right: 10px;
-    }
-
-    .total {
-      text-align: left;
-      padding-left: 10px;
-    }
-
-    .slider {
-      width: 80%;
-      height: 6px;
-      margin-top: 5px;
-      border-radius: 3px;
-      background-color: $darkBackgroundColor;
-
-      span.expand {
-        width: 99.9668557588119%;
-        height: 6px;
-        background-color: $primaryColor;
+      span {
         display: block;
-        border-radius: 3px;
+        @include truncate-text();
+
+        &.artist-title {
+          color: #aaa;
+          margin-top: -2px;
+        }
       }
     }
   }
-
-  .secondary-buttons {
-    width: 10%;
-  }
-
-  .volume {
-    width: 15%;
-  }
 }
 
-.loading
-{
-  width: 100%;
-  height:100%;
-  text-align: center;
-  font-size: 4em;
-  padding-top: 150px;
-}
+.album-list {
+  .album {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+    overflow: auto;
 
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+    img {
+      width: 50px;
+      margin-right: 10px;
+    }
+
+    span {
+      display: block;
+
+      &.imageloader {
+        float: left;
+      }
+
+      &.title {
+        margin-top: 5px;
+      }
+
+      &.artist {
+        color: #aaa;
+      }
+    }
+
+    &:hover {
+      background-color: whitesmoke;
+    }
+  }
 }
