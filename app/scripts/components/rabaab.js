@@ -1,52 +1,59 @@
-import React from 'react';
-import SM from 'soundmanager2';
-import PlayerControls from './player_controls';
-import { Link } from 'react-router';
-import { Playlist } from '../playlist';
+import React           from 'react';
+import SM              from 'soundmanager2';
+import { Link }        from 'react-router';
+import PlayerControls  from './player_controls';
+import SearchBar       from './search_bar';
+import PlaylistSection from './playlist_section';
+import { Playlist }    from '../playlist';
 
-export default class extends React.Component {
+export default class Rabaab extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      canPlay:         false,
-      currentSong:     null,
-      paused:          false,
-      loadingSong:     true,
-      currentPosition: 0,
-      totalDuration:   0,
+      canPlay:          false,
+      currentSong:      null,
+      paused:           false,
+      loadingSong:      true,
+      currentPosition:  0,
+      totalDuration:    0,
       percentageLoaded: 0
     };
+    this.destroyCurrentSound = this.destroyCurrentSound.bind(this);
   }
 
   componentDidMount() {
-    soundManager.onload = () => {
-      this.setState({canPlay: true });
-    }
     this.unsubscribe = Playlist.listen(this.onPlaylistChange.bind(this));
+    soundManager.onload = () => {
+      this.setState({canPlay: true }, this.onPlaylistChange.bind(this));
+    }
   }
 
   componentWillUnmount() {
     this.unsubscribe();
   }
 
+  destroyCurrentSound() {
+    if(this.currentSound !== undefined) {
+      this.currentSound.destruct();
+    }
+  }
+
   onPlaylistChange() {
+    if(Playlist.currentIndex == null) {
+      this.setState({currentSong: null}, this.destroyCurrentSound)
+      return
+    }
     var song = Playlist.songs[Playlist.currentIndex];
     if(this.state.currentSong != song) {
-      if(this.currentSound !== undefined) {
-        this.currentSound.destruct();
-      }
+      this.destroyCurrentSound();
       this.playSong(song);
     } else {
       if(Playlist.playing && this.state.paused) {
         this.currentSound.play();
-        this.setState({
-          paused: false
-        });
+        this.setState({paused: false});
       } else if (!Playlist.playing && !this.state.paused) {
         this.currentSound.pause();
-        this.setState({
-          paused: true
-        });
+        this.setState({paused: true});
       }
     }
   }
@@ -54,52 +61,34 @@ export default class extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        <nav className="navbar navbar-default navbar-fixed-top">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <a className="navbar-brand">Rabaab</a>
-            </div>
-            <ul className="nav navbar-nav">
-              <li><Link to="/">Latest Albums</Link></li>
-              <li><Link to="/search">Search</Link></li>
-            </ul>
-          </div>
-        </nav>
-
-        <div className="content">
-          {this.props.children}
-        </div>
-
-        <div className="navbar-fixed-bottom navbar navbar-inverse">
-          <PlayerControls
-            paused={this.state.paused}
-            song={this.state.currentSong}
-            loading={this.state.loadingSong}
-            currentPosition={this.state.currentPosition}
-            totalDuration={this.state.totalDuration}
-            percentageLoaded={this.state.percentageLoaded}
+        <div className="header">
+          <Link to="/" className="brand">Rabaab</Link>
+          <SearchBar
+            onSearch={this.search.bind(this)}
+            params={this.props.location.query}
           />
         </div>
+        <div className="row">
+          <div className="content col-sm-9">
+            {this.props.children}
+          </div>
+
+          <PlaylistSection />
+        </div>
+        <PlayerControls
+          paused={this.state.paused}
+          song={this.state.currentSong}
+          loading={this.state.loadingSong}
+          currentPosition={this.state.currentPosition}
+          totalDuration={this.state.totalDuration}
+          percentageLoaded={this.state.percentageLoaded}
+        />
       </div>
     );
   }
 
-  onPlayButtonClick() {
-    if(this.state.paused) {
-      this.setState({paused: false});
-      this.currentSound.play();
-    } else {
-      this.currentSound.pause();
-      this.setState({paused: true});
-    }
-  }
-
-  renderSong(song) {
-    return (
-      <li onClick={this.playSong.bind(this, song)}>
-        {song.title}
-      </li>
-    );
+  search(query, type) {
+    this.context.router.replaceWith('search', {query: query, type: type});
   }
 
   playSong(song) {
@@ -118,10 +107,11 @@ export default class extends React.Component {
     });
 
     this.setState({
-      currentSong: song,
-      loadingSong: true,
-      currentPosition: 0,
-      totalDuration:   0,
+      paused:           false,
+      currentSong:      song,
+      loadingSong:      true,
+      currentPosition:  0,
+      totalDuration:    0,
       percentageLoaded: 0
     });
   }
@@ -147,3 +137,8 @@ export default class extends React.Component {
     console.log("song finished");
   }
 }
+
+Rabaab.contextTypes = {
+  router: React.PropTypes.isRequired
+};
+
