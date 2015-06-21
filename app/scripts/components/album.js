@@ -1,7 +1,7 @@
-import React               from 'react';
-import { Link }            from 'react-router';
-import Spinner             from './spinner';
-import { PlaylistActions } from '../playlist';
+import React      from 'react';
+import { Link }   from 'react-router';
+import Spinner    from './spinner';
+import PageHeader from './page_header';
 
 export default class extends React.Component {
   constructor(props) {
@@ -20,12 +20,10 @@ export default class extends React.Component {
   render() {
     return (
       <div className="album">
-        <div className="page-header">
-          <h1>
-            {this.state.album.title}
-            <small>{this.state.album.artist_title}</small>
-          </h1>
-        </div>
+        <PageHeader
+          title={this.state.album.title}
+          subTitle={this.state.album.artist_title}
+        />
         {this.renderContent()}
       </div>
     );

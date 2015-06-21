@@ -2,12 +2,12 @@ import React from 'react';
 import Spinner from './spinner';
 import AlbumList from './album_list';
 import { Link } from 'react-router';
+import PageHeader from './page_header';
 
 export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {albums: [], loading: true};
-    var self = this;
     $.getJSON('http://squirrel.jaischeema.com/api/albums/latest', ((response) => {
       this.setState({albums: response.albums, loading: false});
     }));
@@ -26,9 +26,7 @@ export default class extends React.Component {
     } else {
       return (
         <div className="content">
-          <div className="page-title">
-            <h1>Latest Albums</h1>
-          </div>
+          <PageHeader title="Latest Albums" />
           <AlbumList albums={this.state.albums} />
         </div>
       );
