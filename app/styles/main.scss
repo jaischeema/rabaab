@@ -82,16 +82,17 @@ body {
 
 .playlist-section {
   position: fixed;
-  top: 56px;
+  top: 0px;
   right: 0;
   bottom: 70px;
   background-color: #ddd;
   color: white;
+  z-index: 101;
 
   h2 {
     margin: 0px -15px;
     background-color: rgb(34, 34, 34);
-    padding: 12px 10px;
+    padding: 17px 10px;
     font-size: 20px;
     text-transform: uppercase;
     color: rgb(170, 170, 170);
@@ -99,7 +100,7 @@ body {
 
   .songs {
     position: absolute;
-    top: 45px;
+    top: 56px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -185,7 +186,6 @@ body {
 }
 
 .song-list {
-
   .song {
     position: relative;
     padding: 12px 5px;
@@ -218,6 +218,22 @@ body {
     &:hover {
       background-color: whitesmoke;
       .actions { display: block; }
+    }
+  }
+}
+
+.artist-list {
+  .artist {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+
+    &:hover {
+      background-color: whitesmoke;
     }
   }
 }
