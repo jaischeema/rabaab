@@ -4,6 +4,8 @@ import { Link }            from 'react-router';
 import { PlaylistActions } from '../playlist';
 import AlbumList           from './album_list';
 import SongList            from './song_list';
+import ArtistList          from './artist_list';
+import PageHeader          from './page_header';
 
 export default class extends React.Component {
   constructor(props) {
@@ -25,9 +27,7 @@ export default class extends React.Component {
   render() {
     return (
       <div className="album">
-        <div className="page-header">
-          <h1>Search results</h1>
-        </div>
+        <PageHeader title="Search Results" />
         <div className="content">
           {this.renderContent()}
         </div>
@@ -81,6 +81,6 @@ export default class extends React.Component {
   }
 
   renderArtists() {
-    return (<h1>Artists</h1>);
+    return (<ArtistList artists={this.state.results} />);
   }
 }
