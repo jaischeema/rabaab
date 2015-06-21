@@ -1,8 +1,9 @@
-import React from 'react';
-import Spinner from './spinner';
-import { Link } from 'react-router';
+import React               from 'react';
+import Spinner             from './spinner';
+import { Link }            from 'react-router';
 import { PlaylistActions } from '../playlist';
-import AlbumList from './album_list';
+import AlbumList           from './album_list';
+import SongList            from './song_list';
 
 export default class extends React.Component {
   constructor(props) {
@@ -72,7 +73,7 @@ export default class extends React.Component {
   }
 
   renderSongs() {
-    return (<h1>Songs</h1>);
+    return (<SongList songs={this.state.results} showAlbum={true} />);
   }
 
   renderAlbums() {

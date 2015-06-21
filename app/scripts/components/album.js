@@ -1,6 +1,7 @@
 import React      from 'react';
 import { Link }   from 'react-router';
 import Spinner    from './spinner';
+import SongList   from './song_list';
 import PageHeader from './page_header';
 
 export default class extends React.Component {
@@ -40,19 +41,7 @@ export default class extends React.Component {
         />
       );
     } else {
-      return (
-        <ul>
-          {this.state.album.songs.map((song) => { return this.renderSong(song) })}
-        </ul>
-      );
+      return ( <SongList songs={this.state.album.songs} /> );
     }
-  }
-
-  renderSong(song) {
-    return (<li onClick={this.onSongClick.bind(this, song)}>{song.title}</li>);
-  }
-
-  onSongClick(song) {
-    PlaylistActions.add(song);
   }
 }
