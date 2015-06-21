@@ -21,7 +21,15 @@ export default class ReactSpinner extends React.Component {
 
   render() {
     return (
-      <span ref="container" />
+      <span
+        ref="container"
+        style={{
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          textAlign: 'center'
+        }}
+      />
     );
   }
 }

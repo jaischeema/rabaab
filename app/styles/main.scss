@@ -19,6 +19,10 @@ body {
   height: 100%;
 }
 
+.content {
+  min-height: 400px;
+}
+
 .player-controls {
   position: fixed;
   right: 0;
@@ -94,7 +98,12 @@ body {
   }
 
   .songs {
-    margin: 0 -15px;
+    position: absolute;
+    top: 45px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: scroll;
 
     a {
       cursor: pointer;
@@ -156,6 +165,8 @@ body {
 
       &.imageloader {
         float: left;
+        width: 60px;
+        height: 50px;
       }
 
       &.title {
@@ -169,6 +180,44 @@ body {
 
     &:hover {
       background-color: whitesmoke;
+    }
+  }
+}
+
+.song-list {
+
+  .song {
+    position: relative;
+    padding: 12px 5px;
+    border-bottom: 1px solid #eee;
+
+    .title {
+      display: block;
+      font-size: 16px;
+    }
+
+    .artist {
+      display: block;
+      color: #aaa;
+    }
+
+    a { color: #888; }
+
+    .actions {
+      display: none;
+      position: absolute;
+      top: 20px;
+      right: 0;
+      font-size: 20px;
+
+      i {
+        margin-right: 10px;
+      }
+    }
+
+    &:hover {
+      background-color: whitesmoke;
+      .actions { display: block; }
     }
   }
 }
