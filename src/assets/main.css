@@ -33,3 +33,77 @@ body {
 .playing-info span {
   display: block;
 }
+
+.container {
+  max-width: 900px;
+}
+
+.collection {
+  overflow: auto;
+}
+
+.collection__item {
+  display: inline-block;
+  width: 160px;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #333;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.collection__item:hover {
+  border-color: #444;
+}
+
+.collection__item__image {
+  max-width: 100%;
+  height: auto;
+}
+
+.collection__item__title {
+  font-size: 0.9rem;
+  font-weight: lighter;
+  padding-top: 11px;
+  text-align: center;
+  margin-bottom: 0;
+  color: #999;
+}
+
+
+.list {
+  overflow: auto;
+}
+
+.list__item {
+  margin: 10px;
+  overflow: auto;
+  border: 1px solid #222;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.list__item:hover {
+  border-color: #2b7baa;
+}
+
+.list__item__image {
+  height: 65px;
+  width: 65px;
+  float: left;
+}
+
+.list__item__content {
+  margin-left: 10px;
+  float: left;
+}
+
+.list__item__title {
+  display: block;
+}
+
+.list__item__sub_title {
+  font-size: 80%;
+  display: block;
+  color: #989;
+}

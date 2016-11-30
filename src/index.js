@@ -2,6 +2,8 @@ require('./assets/bootstrap.min.css');
 require('./assets/font-awesome.css');
 require('./assets/main.css');
 
+var t = require('./assets/images/artwork.png');
+
 const Elm  = require('./Main.elm');
 const root = document.getElementById('root');
 const app  = Elm.Main.embed(root);

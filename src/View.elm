@@ -23,9 +23,30 @@ view { playlists, currentPage, currentPlaying } =
                         ]
     in
         div [ class "wrapper" ]
-            [ div [ class "content" ] [ pageContent ]
+            [ renderNavbar currentPage
+            , div [ class "container" ] [ pageContent ]
             , div [ class "player" ] [ renderPlayer currentPlaying ]
             ]
+
+
+renderNavbar : Page -> Html Msg
+renderNavbar page =
+    div [ class "navbar navbar-dark bg-inverse" ]
+        [ div [ class "container" ]
+            [ a [ class "navbar-brand", onClick <| ChangePage HomePage ] [ text "Rabaab" ]
+            , ul [ class "nav navbar-nav" ]
+                [ navLink "Latest Playlists" HomePage page
+                , navLink "Queue" HomePage page
+                ]
+            ]
+        ]
+
+
+navLink : String -> Page -> Page -> Html Msg
+navLink title destination current =
+    li [ classList [ ( "active", destination == current ), ( "nav-item", True ) ] ]
+        [ a [ class "nav-link", onClick <| ChangePage destination ] [ text title ]
+        ]
 
 
 renderHomePage : WebData (List Playlist) -> Html Msg
@@ -97,45 +118,30 @@ metaInfo song =
 
 renderPlaylists : List Playlist -> Html Msg
 renderPlaylists playlists =
-    table [ class "table" ]
-        [ thead []
-            [ tr []
-                [ th [] [ text "Id" ]
-                , th [] [ text "Title" ]
-                , th [] [ text "Songs" ]
-                ]
-            ]
-        , tbody [] (List.map renderPlaylist playlists)
-        ]
+    div [ class "collection" ] (List.map renderPlaylist playlists)
 
 
 renderPlaylist : Playlist -> Html Msg
 renderPlaylist playlist =
-    tr [ onClick <| ChangePage (PlaylistPage playlist) ]
-        [ td [] [ text <| toString playlist.id ]
-        , td [] [ text playlist.title ]
-        , td [] [ text <| toString <| List.length playlist.songs ]
+    div [ class "collection__item", onClick <| ChangePage (PlaylistPage playlist) ]
+        [ img [ class "collection__item__image", src "/static/media/artwork.3eb76a6e.png" ] []
+        , div [ class "collection__item__content" ]
+            [ h4 [ class "collection__item__title" ] [ text playlist.title ]
+            ]
         ]
 
 
 renderSongs : List Song -> Html Msg
 renderSongs songs =
-    table [ class "table" ]
-        [ thead []
-            [ tr []
-                [ th [] [ text "Id" ]
-                , th [] [ text "Title" ]
-                , th [] [ text "Album title" ]
-                ]
-            ]
-        , tbody [] (List.map renderSong songs)
-        ]
+    div [ class "list" ] (List.map renderSong songs)
 
 
 renderSong : Song -> Html Msg
 renderSong song =
-    tr [ onClick <| PlaySong song ]
-        [ td [] [ img [ src song.cover, width 75, height 75 ] [] ]
-        , td [] [ text song.title ]
-        , td [] [ text song.albumTitle ]
+    div [ class "list__item", onClick <| PlaySong song ]
+        [ img [ class "list__item__image", src song.cover ] []
+        , div [ class "list__item__content" ]
+            [ span [ class "list__item__title" ] [ text song.title ]
+            , span [ class "list__item__sub_title" ] [ metaInfo song ]
+            ]
         ]
