@@ -81,18 +81,18 @@ update msg model =
         Pause ->
             case model.currentPlaying of
                 Just playingInfo ->
-                    ( { model | currentPlaying = Just { playingInfo | state = Paused } }, Cmd.none )
+                    ( { model | currentPlaying = Just { playingInfo | state = Paused } }, pause () )
 
                 Nothing ->
-                    ( model, pause () )
+                    ( model, Cmd.none )
 
         Play ->
             case model.currentPlaying of
                 Just playingInfo ->
-                    ( { model | currentPlaying = Just { playingInfo | state = Playing } }, Cmd.none )
+                    ( { model | currentPlaying = Just { playingInfo | state = Playing } }, play () )
 
                 Nothing ->
-                    ( model, play () )
+                    ( model, Cmd.none )
 
         Next ->
             ( model, Cmd.none )
