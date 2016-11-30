@@ -17,7 +17,10 @@ view { playlists, currentPage, currentPlaying } =
                     renderHomePage playlists
 
                 PlaylistPage playlist ->
-                    renderSongs playlist.songs
+                    div [ class "page" ]
+                        [ a [ onClick <| ChangePage HomePage ] [ text "Go Back" ]
+                        , renderSongs playlist.songs
+                        ]
     in
         div [ class "wrapper" ]
             [ div [ class "content" ] [ pageContent ]
@@ -44,10 +47,10 @@ renderHomePage playlistsData =
 renderPlayer : Maybe PlayingInfo -> Html Msg
 renderPlayer data =
     div [ class "player-bar row" ]
-        [ div [ class "hidden-lg-up song-info mobile-song-info" ]
+        [ div [ class "col-xs-12 hidden-lg-up song-info mobile-song-info" ]
             [ renderCurrentSongInfo data ]
-        , div [ class "col-lg-6" ]
-            [ div [ class "row player-controls" ]
+        , div [ class "col-lg-6 player-controls" ]
+            [ div [ class "row" ]
                 [ a [ class "col-xs-2 player-button previous-button" ]
                     [ i [ class "fa fa-fast-backward" ] [] ]
                 , a [ class "col-xs-2 player-button play-button" ]
@@ -69,7 +72,27 @@ renderPlayer data =
 
 renderCurrentSongInfo : Maybe PlayingInfo -> Html Msg
 renderCurrentSongInfo playingInfo =
-    text "No track is playing right now"
+    case playingInfo of
+        Nothing ->
+            text "No track is playing right now"
+
+        Just info ->
+            div [ class "playing-info" ]
+                [ span [ class "playing-info__title" ] [ text info.song.title ]
+                , span [ class "playing-info__album_artists" ] [ metaInfo info.song ]
+                ]
+
+
+metaInfo : Song -> Html Msg
+metaInfo song =
+    let
+        artistTitles =
+            String.join ", " song.artists
+
+        info =
+            song.albumTitle ++ " - " ++ artistTitles
+    in
+        text info
 
 
 renderPlaylists : List Playlist -> Html Msg

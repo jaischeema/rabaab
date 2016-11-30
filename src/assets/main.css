@@ -14,7 +14,7 @@ body {
 }
 
 .song-info {
-  padding: 20px;
+  padding: 10px 25px;
 }
 
 .mobile-song-info {
@@ -22,9 +22,14 @@ body {
 }
 
 .player-controls {
+  overflow: auto;
   padding: 20px;
 }
 
 .player-controls .player-button {
   text-align: center;
+}
+
+.playing-info span {
+  display: block;
 }
