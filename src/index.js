@@ -1,4 +1,6 @@
-require('./main.css');
+require('./assets/bootstrap.min.css');
+require('./assets/font-awesome.css');
+require('./assets/main.css');
 
 const Elm  = require('./Main.elm');
 const root = document.getElementById('root');

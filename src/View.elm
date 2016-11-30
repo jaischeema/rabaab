@@ -1,6 +1,6 @@
 module View exposing (..)
 
-import Html exposing (Html, text, div, table, tbody, td, th, tr, img, thead)
+import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import Types exposing (..)
@@ -43,15 +43,33 @@ renderHomePage playlistsData =
 
 renderPlayer : Maybe PlayingInfo -> Html Msg
 renderPlayer data =
-    case data of
-        Just playingInfo ->
-            div [ class "player" ]
-                [ text playingInfo.song.title
-                , text playingInfo.song.albumTitle
+    div [ class "player-bar row" ]
+        [ div [ class "hidden-lg-up song-info mobile-song-info" ]
+            [ renderCurrentSongInfo data ]
+        , div [ class "col-lg-6" ]
+            [ div [ class "row player-controls" ]
+                [ a [ class "col-xs-2 player-button previous-button" ]
+                    [ i [ class "fa fa-fast-backward" ] [] ]
+                , a [ class "col-xs-2 player-button play-button" ]
+                    [ i [ class "fa fa-play" ] [] ]
+                , a [ class "col-xs-2 player-button stop-button" ]
+                    [ i [ class "fa fa-stop" ] [] ]
+                , a [ class "col-xs-2 player-button next-button" ]
+                    [ i [ class "fa fa-fast-forward" ] [] ]
+                , a [ class "col-xs-2 player-button shuffle-button" ]
+                    [ i [ class "fa fa-random" ] [] ]
+                , a [ class "col-xs-2 player-button repeat-button" ]
+                    [ i [ class "fa fa-refresh" ] [] ]
                 ]
+            ]
+        , div [ class "hidden-md-down col-lg-6 song-info" ]
+            [ renderCurrentSongInfo data ]
+        ]
 
-        Nothing ->
-            text "Nothing"
+
+renderCurrentSongInfo : Maybe PlayingInfo -> Html Msg
+renderCurrentSongInfo playingInfo =
+    text "No track is playing right now"
 
 
 renderPlaylists : List Playlist -> Html Msg

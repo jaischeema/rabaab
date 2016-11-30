@@ -1,0 +1,30 @@
+body {
+  background-color: #26292C;
+  color: #ddd;
+  padding-bottom: 50px;
+}
+
+.player-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  color: #758389;
+}
+
+.song-info {
+  padding: 20px;
+}
+
+.mobile-song-info {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.player-controls {
+  padding: 20px;
+}
+
+.player-controls .player-button {
+  text-align: center;
+}
