@@ -9,8 +9,25 @@ import RemoteData exposing (..)
 
 
 view : Model -> Html Msg
-view model =
-    case model.data of
+view { playlists, currentPage, currentPlaying } =
+    let
+        pageContent =
+            case currentPage of
+                HomePage ->
+                    renderHomePage playlists
+
+                PlaylistPage playlist ->
+                    renderSongs playlist.songs
+    in
+        div [ class "wrapper" ]
+            [ div [ class "content" ] [ pageContent ]
+            , div [ class "player" ] [ renderPlayer currentPlaying ]
+            ]
+
+
+renderHomePage : WebData (List Playlist) -> Html Msg
+renderHomePage playlistsData =
+    case playlistsData of
         NotAsked ->
             text "Initialising"
 
@@ -20,18 +37,26 @@ view model =
         Failure err ->
             text (toString err)
 
-        Success data ->
-            case data.currentPage of
-                HomePage ->
-                    renderPlaylists data.playlists
+        Success playlists ->
+            renderPlaylists playlists
 
-                PlaylistPage playlist ->
-                    renderSongs playlist.songs
+
+renderPlayer : Maybe PlayingInfo -> Html Msg
+renderPlayer data =
+    case data of
+        Just playingInfo ->
+            div [ class "player" ]
+                [ text playingInfo.song.title
+                , text playingInfo.song.albumTitle
+                ]
+
+        Nothing ->
+            text "Nothing"
 
 
 renderPlaylists : List Playlist -> Html Msg
 renderPlaylists playlists =
-    table []
+    table [ class "table" ]
         [ thead []
             [ tr []
                 [ th [] [ text "Id" ]
@@ -54,7 +79,7 @@ renderPlaylist playlist =
 
 renderSongs : List Song -> Html Msg
 renderSongs songs =
-    table []
+    table [ class "table" ]
         [ thead []
             [ tr []
                 [ th [] [ text "Id" ]
@@ -68,7 +93,7 @@ renderSongs songs =
 
 renderSong : Song -> Html Msg
 renderSong song =
-    tr []
+    tr [ onClick <| PlaySong song ]
         [ td [] [ img [ src song.cover, width 75, height 75 ] [] ]
         , td [] [ text song.title ]
         , td [] [ text song.albumTitle ]

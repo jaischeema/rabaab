@@ -1,7 +1,29 @@
 require('./main.css');
 
-var Elm = require('./Main.elm');
+const Elm  = require('./Main.elm');
+const root = document.getElementById('root');
+const app  = Elm.Main.embed(root);
 
-var root = document.getElementById('root');
+var audio = new Audio();
 
-Elm.Main.embed(root);
+app.ports.setSource.subscribe((source) => {
+  audio.src = source;
+  audio.load();
+  audio.play();
+});
+
+app.ports.setCurrentTime.subscribe((time) => {
+  audio.currentTime = time;
+});
+
+app.ports.setPlaybackRate.subscribe((rate) => {
+  audio.playbackRate = rate;
+});
+
+app.ports.play.subscribe(() => {
+  audio.play();
+});
+
+app.ports.pause.subscribe(() => {
+  audio.pause();
+});
