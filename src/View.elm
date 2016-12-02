@@ -9,7 +9,7 @@ import RemoteData exposing (..)
 
 
 view : Model -> Html Msg
-view { playlists, currentPage, currentPlaying } =
+view { playlists, currentPage, queue, currentPlaying } =
     let
         pageContent =
             case currentPage of
@@ -17,28 +17,44 @@ view { playlists, currentPage, currentPlaying } =
                     renderHomePage playlists
 
                 PlaylistPage playlist ->
-                    div [ class "page" ]
-                        [ a [ onClick <| ChangePage HomePage ] [ text "Go Back" ]
-                        , renderSongs playlist.songs
-                        ]
+                    renderSongs playlist.songs
     in
         div [ class "wrapper" ]
             [ renderNavbar currentPage
-            , div [ class "container" ] [ pageContent ]
+            , div [ class "container-fluid" ]
+                [ div [ class "main" ] [ pageContent ] ]
             , div [ class "player" ] [ renderPlayer currentPlaying ]
+            , renderQueue queue currentPlaying
             ]
 
 
 renderNavbar : Page -> Html Msg
 renderNavbar page =
-    div [ class "navbar navbar-dark bg-inverse" ]
-        [ div [ class "container" ]
+    div [ class "navbar navbar-fixed-top navbar-dark bg-inverse" ]
+        [ div [ class "container-fluid" ]
             [ a [ class "navbar-brand", onClick <| ChangePage HomePage ] [ text "Rabaab" ]
             , ul [ class "nav navbar-nav" ]
                 [ navLink "Latest Playlists" HomePage page
-                , navLink "Queue" HomePage page
                 ]
+            , div [ class "form-inline float-lg-right" ]
+                [ input [ class "form-control", type_ "text", placeholder "Search" ] [] ]
             ]
+        ]
+
+
+renderQueue : List Song -> Maybe PlayingInfo -> Html Msg
+renderQueue queue playingInfo =
+    div [ class "queue" ]
+        [ h2 [ class "queue__title" ] [ text "Queue" ]
+        , div [ class "queue__list" ] (List.map renderQueueSong queue)
+        ]
+
+
+renderQueueSong : Song -> Html Msg
+renderQueueSong song =
+    a [ class "queue__list__item" ]
+        [ h5 [ class "queue__list__item__title" ] [ text song.title ]
+        , p [ class "queue__list__item__subtitle" ] [ metaInfo song ]
         ]
 
 

@@ -2,6 +2,8 @@ body {
   background-color: #26292C;
   color: #ddd;
   padding-bottom: 50px;
+  padding-right: 300px;
+  padding-top: 60px;
 }
 
 .player-bar {
@@ -11,6 +13,17 @@ body {
   right: 0;
   background-color: #fff;
   color: #758389;
+  z-index: 11;
+}
+
+.queue {
+  position: fixed;
+  top: 50px;
+  bottom: 50px;
+  right: 0;
+  width: 300px;
+  padding: 20px 10px;
+  background-color: #111;
 }
 
 .song-info {
@@ -106,4 +119,29 @@ body {
   font-size: 80%;
   display: block;
   color: #989;
+}
+
+.queue__title {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: lighter;
+  border-bottom: 1px solid #2b7baa;
+  padding-bottom: 10px;
+}
+
+.queue__list__item {
+  border-bottom: 1px solid #222;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.queue__list__item__title {
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.queue__list__item__subtitle {
+  font-size: 11px;
+  color: #777;
+  margin-bottom: 5px;
 }
