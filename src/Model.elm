@@ -2,6 +2,7 @@ module Model exposing (..)
 
 import RemoteData exposing (RemoteData(..), WebData)
 import Types exposing (..)
+import Array exposing (..)
 
 
 type PlayState
@@ -11,9 +12,18 @@ type PlayState
     | Idle
 
 
+type SearchType
+    = Song
+    | Album
+    | Artist
+
+
 type Page
     = HomePage
     | PlaylistPage Playlist
+    | SearchPage String Int SearchType
+    | AlbumPage Album
+    | ArtistPage Artist Int
 
 
 type Msg
@@ -28,12 +38,18 @@ type Msg
     | Next
     | Previous
     | SeekTo Int
+    | ChangePlayerState String
+    | ChangePlayerCurrentTime Float
+    | ChangePlayerDownloadedProgress Float
+    | ChangePlayerDuration Float
+    | ItemEnded String
 
 
 type alias PlayingInfo =
     { song : Song
-    , elapsedTime : Int
-    , duration : Int
+    , currentTime : Float
+    , duration : Float
+    , downloadProgress : Float
     , state : PlayState
     }
 
@@ -41,8 +57,8 @@ type alias PlayingInfo =
 type alias Model =
     { playlists : WebData (List Playlist)
     , currentPage : Page
-    , currentPlaying : Maybe PlayingInfo
-    , queue : List Song
+    , player : Maybe PlayingInfo
+    , queue : Array Song
     }
 
 
@@ -50,6 +66,6 @@ initModel : Model
 initModel =
     { playlists = NotAsked
     , currentPage = HomePage
-    , currentPlaying = Nothing
-    , queue = []
+    , player = Nothing
+    , queue = Array.empty
     }

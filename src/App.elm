@@ -5,6 +5,10 @@ import RemoteData exposing (..)
 import Types exposing (..)
 import Model exposing (..)
 import Api exposing (playlistsRequest)
+import Array exposing (..)
+
+
+-- Ports to control the music player
 
 
 port setSource : DownloadLink -> Cmd msg
@@ -22,6 +26,25 @@ port play : () -> Cmd msg
 port pause : () -> Cmd msg
 
 
+port state : (String -> msg) -> Sub msg
+
+
+port currentTime : (Float -> msg) -> Sub msg
+
+
+port progress : (Float -> msg) -> Sub msg
+
+
+port duration : (Float -> msg) -> Sub msg
+
+
+port endItem : (String -> msg) -> Sub msg
+
+
+
+-- Init
+
+
 getPlaylists : Cmd Msg
 getPlaylists =
     Http.send (PlaylistsResponse << RemoteData.fromResult) playlistsRequest
@@ -34,7 +57,17 @@ init =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Sub.batch
+        [ state ChangePlayerState
+        , currentTime ChangePlayerCurrentTime
+        , progress ChangePlayerDownloadedProgress
+        , duration ChangePlayerDuration
+        , endItem ItemEnded
+        ]
+
+
+
+-- Update
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -49,7 +82,7 @@ update msg model =
         PlaySong song ->
             let
                 playingInfo =
-                    { song = song, duration = 0, elapsedTime = 0, state = Idle }
+                    { song = song, duration = 0, currentTime = 0, downloadProgress = 0, state = Idle }
 
                 source =
                     List.head song.downloadLinks
@@ -63,7 +96,7 @@ update msg model =
                             setSource link
             in
                 ( { model
-                    | currentPlaying = Just playingInfo
+                    | player = Just playingInfo
                     , queue = addSongToQueue song model.queue
                   }
                 , command
@@ -73,26 +106,19 @@ update msg model =
             ( { model | queue = addSongToQueue song model.queue }, Cmd.none )
 
         RemoveSongFromQueue song ->
-            ( { model | queue = List.filter (\x -> x.id /= song.id) model.queue }, Cmd.none )
+            ( { model | queue = Array.filter (\x -> x.id /= song.id) model.queue }, Cmd.none )
 
         MoveSongInQueue _ _ ->
             ( model, Cmd.none )
 
         Pause ->
-            case model.currentPlaying of
-                Just playingInfo ->
-                    ( { model | currentPlaying = Just { playingInfo | state = Paused } }, pause () )
-
-                Nothing ->
-                    ( model, Cmd.none )
+            ( model, pause () )
 
         Play ->
-            case model.currentPlaying of
-                Just playingInfo ->
-                    ( { model | currentPlaying = Just { playingInfo | state = Playing } }, play () )
+            ( model, play () )
 
-                Nothing ->
-                    ( model, Cmd.none )
+        ItemEnded _ ->
+            update Next model
 
         Next ->
             ( model, Cmd.none )
@@ -103,16 +129,58 @@ update msg model =
         SeekTo time ->
             ( model, Cmd.none )
 
+        ChangePlayerState stateString ->
+            let
+                playerState =
+                    case stateString of
+                        "playing" ->
+                            Playing
 
-addSongToQueue : Song -> List Song -> List Song
+                        "paused" ->
+                            Paused
+
+                        "loading" ->
+                            Buffering
+
+                        _ ->
+                            Idle
+
+                player =
+                    Maybe.map (\playingInfo -> { playingInfo | state = playerState }) model.player
+            in
+                ( { model | player = player }, Cmd.none )
+
+        ChangePlayerCurrentTime currentTime ->
+            let
+                player =
+                    Maybe.map (\playingInfo -> { playingInfo | currentTime = currentTime }) model.player
+            in
+                ( { model | player = player }, Cmd.none )
+
+        ChangePlayerDuration duration ->
+            let
+                player =
+                    Maybe.map (\playingInfo -> { playingInfo | duration = duration }) model.player
+            in
+                ( { model | player = player }, Cmd.none )
+
+        ChangePlayerDownloadedProgress downloadProgress ->
+            let
+                player =
+                    Maybe.map (\playingInfo -> { playingInfo | downloadProgress = downloadProgress }) model.player
+            in
+                ( { model | player = player }, Cmd.none )
+
+
+addSongToQueue : Song -> Array Song -> Array Song
 addSongToQueue song queue =
     let
         queueSong =
-            queue |> List.filter (\x -> x.id == song.id) |> List.head
+            queue |> Array.filter (\x -> x.id == song.id) |> Array.get 0
     in
         case queueSong of
             Nothing ->
-                song :: queue
+                Array.push song queue
 
             Just _ ->
                 queue

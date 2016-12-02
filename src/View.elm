@@ -6,10 +6,11 @@ import Html.Attributes exposing (..)
 import Types exposing (..)
 import Model exposing (..)
 import RemoteData exposing (..)
+import Array exposing (..)
 
 
 view : Model -> Html Msg
-view { playlists, currentPage, queue, currentPlaying } =
+view { playlists, currentPage, queue, player } =
     let
         pageContent =
             case currentPage of
@@ -18,13 +19,16 @@ view { playlists, currentPage, queue, currentPlaying } =
 
                 PlaylistPage playlist ->
                     renderSongs playlist.songs
+
+                _ ->
+                    text "Haven't handled that case yet"
     in
         div [ class "wrapper" ]
             [ renderNavbar currentPage
             , div [ class "container-fluid" ]
                 [ div [ class "main" ] [ pageContent ] ]
-            , div [ class "player" ] [ renderPlayer currentPlaying ]
-            , renderQueue queue currentPlaying
+            , div [ class "player" ] [ renderPlayer player ]
+            , renderQueue queue player
             ]
 
 
@@ -42,11 +46,11 @@ renderNavbar page =
         ]
 
 
-renderQueue : List Song -> Maybe PlayingInfo -> Html Msg
+renderQueue : Array Song -> Maybe PlayingInfo -> Html Msg
 renderQueue queue playingInfo =
     div [ class "queue" ]
         [ h2 [ class "queue__title" ] [ text "Queue" ]
-        , div [ class "queue__list" ] (List.map renderQueueSong queue)
+        , div [ class "queue__list" ] (Array.map renderQueueSong queue |> Array.toList)
         ]
 
 
@@ -83,28 +87,55 @@ renderHomePage playlistsData =
 
 renderPlayer : Maybe PlayingInfo -> Html Msg
 renderPlayer data =
-    div [ class "player-bar row" ]
-        [ div [ class "col-xs-12 hidden-lg-up song-info mobile-song-info" ]
-            [ renderCurrentSongInfo data ]
-        , div [ class "col-lg-6 player-controls" ]
-            [ div [ class "row" ]
-                [ a [ class "col-xs-2 player-button previous-button" ]
-                    [ i [ class "fa fa-fast-backward" ] [] ]
-                , a [ class "col-xs-2 player-button play-button" ]
-                    [ i [ class "fa fa-play" ] [] ]
-                , a [ class "col-xs-2 player-button stop-button" ]
-                    [ i [ class "fa fa-stop" ] [] ]
-                , a [ class "col-xs-2 player-button next-button" ]
-                    [ i [ class "fa fa-fast-forward" ] [] ]
-                , a [ class "col-xs-2 player-button shuffle-button" ]
-                    [ i [ class "fa fa-random" ] [] ]
-                , a [ class "col-xs-2 player-button repeat-button" ]
-                    [ i [ class "fa fa-refresh" ] [] ]
+    let
+        playbuttonClass =
+            case data of
+                Just playingInfo ->
+                    case playingInfo.state of
+                        Paused ->
+                            "fa-play"
+
+                        _ ->
+                            "fa-pause"
+
+                Nothing ->
+                    "fa-play"
+
+        playAction =
+            case data of
+                Just playingInfo ->
+                    case playingInfo.state of
+                        Paused ->
+                            Play
+
+                        _ ->
+                            Pause
+
+                Nothing ->
+                    Play
+    in
+        div [ class "player-bar row" ]
+            [ div [ class "col-xs-12 hidden-lg-up song-info mobile-song-info" ]
+                [ renderCurrentSongInfo data ]
+            , div [ class "col-lg-6 player-controls" ]
+                [ div [ class "row" ]
+                    [ a [ class "col-xs-2 player-button previous-button" ]
+                        [ i [ class "fa fa-fast-backward" ] [] ]
+                    , a [ class "col-xs-2 player-button play-button", onClick playAction ]
+                        [ i [ class <| "fa " ++ playbuttonClass ] [] ]
+                    , a [ class "col-xs-2 player-button stop-button" ]
+                        [ i [ class "fa fa-stop" ] [] ]
+                    , a [ class "col-xs-2 player-button next-button" ]
+                        [ i [ class "fa fa-fast-forward" ] [] ]
+                    , a [ class "col-xs-2 player-button shuffle-button" ]
+                        [ i [ class "fa fa-random" ] [] ]
+                    , a [ class "col-xs-2 player-button repeat-button" ]
+                        [ i [ class "fa fa-refresh" ] [] ]
+                    ]
                 ]
+            , div [ class "hidden-md-down col-lg-6 song-info" ]
+                [ renderCurrentSongInfo data ]
             ]
-        , div [ class "hidden-md-down col-lg-6 song-info" ]
-            [ renderCurrentSongInfo data ]
-        ]
 
 
 renderCurrentSongInfo : Maybe PlayingInfo -> Html Msg
