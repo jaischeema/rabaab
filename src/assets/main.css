@@ -66,6 +66,26 @@ body {
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
+.player__progress {
+  height: 5px;
+  background-color: #666;
+  position: relative;
+}
+
+.player__progress__timer {
+  background-color: yellow;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.player__progress__download {
+  background-color: #444;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
 .player-controls {
   overflow: auto;
   padding: 20px;
@@ -263,4 +283,26 @@ body {
 
 .pointer {
   cursor: pointer;
+}
+
+td.play__icon i {
+  visibility: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px 9px;
+  border-radius: 22px;
+}
+
+tr:hover td.play__icon i {
+  visibility: visible;
+}
+
+td.playing__icon {
+  color: lightgreen;
+  font-size: 26px;
+  padding-left: 9px;
+}
+
+tr.current {
+  background-color: rgba(38, 76, 38, 0.3) !important;
 }

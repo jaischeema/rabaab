@@ -88,35 +88,34 @@ renderHomePage playlistsData =
 renderPlayer : Maybe PlayingInfo -> Html Msg
 renderPlayer data =
     let
-        playbuttonClass =
+        ( playbuttonClass, playAction ) =
             case data of
                 Just playingInfo ->
                     case playingInfo.state of
                         Paused ->
-                            "fa-play"
+                            ( "fa-play", Play )
 
                         _ ->
-                            "fa-pause"
+                            ( "fa-pause", Pause )
 
                 Nothing ->
-                    "fa-play"
+                    ( "fa-play", Play )
 
-        playAction =
+        ( playProgress, downloadProgress ) =
             case data of
-                Just playingInfo ->
-                    case playingInfo.state of
-                        Paused ->
-                            Play
-
-                        _ ->
-                            Pause
+                Just { currentTime, duration, downloadProgress } ->
+                    ( toString (currentTime / duration * 100.0) ++ "%", (toString downloadProgress) ++ "%" )
 
                 Nothing ->
-                    Play
+                    ( "0%", "0%" )
     in
         div [ class "player-bar row" ]
             [ div [ class "col-xs-12 hidden-lg-up song-info mobile-song-info" ]
                 [ renderCurrentSongInfo data ]
+            , div [ class "player__progress" ]
+                [ div [ class "player__progress__download", style [ ( "width", downloadProgress ) ] ] []
+                , div [ class "player__progress__timer", style [ ( "width", playProgress ) ] ] []
+                ]
             , div [ class "col-lg-6 player-controls" ]
                 [ div [ class "row" ]
                     [ a [ class "col-xs-2 player-button previous-button", onClick Previous ]
