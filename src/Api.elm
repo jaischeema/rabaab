@@ -47,6 +47,7 @@ playlistDecoder =
         |> required "id" int
         |> required "title" string
         |> required "songs" (list songDecoder)
+        |> required "cover_image_url" string
 
 
 playlistsDecoder : Decoder (List Playlist)

@@ -1,5 +1,5 @@
 body {
-  background-color: #26292C;
+  background-color: #111418;
   color: #ddd;
   padding-bottom: 70px;
   padding-right: 300px;
@@ -15,9 +15,10 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #fff;
-  color: #758389;
+  background-color: #36383D;
+  color: #CDCDCD;
   z-index: 11;
+  box-shadow: 0 20px 36px 20px rgba(0,0,0,.65);
 }
 
 .queue {
@@ -27,7 +28,29 @@ body {
   right: 0;
   width: 300px;
   padding: 20px 10px;
-  background-color: #111;
+  background-color: #222428;
+}
+
+.navbar-dark {
+  background: #222428 !important;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
+}
+
+.search-input {
+  border-radius: 25px;
+  background: #36383d;
+  padding: 5px 15px;
+  margin: 5px 0 0;
+  font-size: 100%;
+  color: rgba(255,255,255,.8);
+  letter-spacing: .7px;
+}
+
+.search-input:focus {
+  color: rgba(255,255,255,.8);
+  background: #36383d;
+  border-color: #4e5054;
+  outline: 0;
 }
 
 .main {
@@ -69,8 +92,6 @@ body {
   width: 160px;
   padding: 10px;
   margin: 10px;
-  border: 1px solid #222;
-  border-radius: 3px;
   cursor: pointer;
 }
 
@@ -80,21 +101,64 @@ body {
 
 .collection__item__image {
   max-width: 100%;
+  border: 1px solid #292929;
+  border-radius: 3px;
   height: auto;
+  min-height: 140px;
+}
+
+.collection__title {
+  margin: 20px 20px 0 20px;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.06rem;
+  color: rgba(255, 255, 255, 0.40);
+  font-family: Lato;
 }
 
 .collection__item__title {
-  font-size: 0.9rem;
-  font-weight: lighter;
-  padding-top: 11px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding-top: 16px;
   text-align: center;
   margin-bottom: 0;
-  color: #999;
+  color: #DDD;
+  letter-spacing: 0.07rem;
 }
 
+.playlist {
+  padding: 20px;
+}
+
+.playlist__header {
+  overflow: auto;
+  margin-bottom: 20px;
+}
+
+.playlist__header img {
+  display: block;
+  width: 150px;
+  margin-right: 20px;
+  float: left;
+}
+
+.playlist__header__content {
+  margin-top: 10px;
+}
 
 .list {
   overflow: auto;
+}
+
+.list__title {
+  margin: 20px 20px 0 20px;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.06rem;
+  color: rgba(255, 255, 255, 0.40);
+  font-family: Lato;
+  margin: 20px 10px;
+
 }
 
 .list__item {
@@ -151,4 +215,39 @@ body {
   font-size: 11px;
   color: #777;
   margin-bottom: 5px;
+}
+
+.table-playlist {
+  font-size: small;
+  letter-spacing: 0.8px;
+  font-family: Lato;
+}
+
+.table-playlist thead th {
+  border-bottom: 1px solid #222428;
+  padding: 20px 15px 40px;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #909193;
+  letter-spacing: 1.3px;
+  font-weight: 400;
+  border-top: none;
+}
+
+.table-playlist tbody td {
+  border-bottom: 1px solid #222428;
+  vertical-align: middle;
+  padding: 10px 15px;
+}
+
+.table-playlist tbody tr:hover {
+  background-color: #222428;
+}
+
+.song__cover {
+  height: 36px;
+  width: 36px;
+  border-radius: 5px;
+  float: left;
+  margin-right: 10px;
 }

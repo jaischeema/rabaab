@@ -18,7 +18,7 @@ view { playlists, currentPage, queue, player } =
                     renderHomePage playlists
 
                 PlaylistPage playlist ->
-                    renderSongs playlist.songs
+                    renderPlaylistSongs playlist player
 
                 _ ->
                     text "Haven't handled that case yet"
@@ -41,7 +41,7 @@ renderNavbar page =
                 [ navLink "Latest Playlists" HomePage page
                 ]
             , div [ class "form-inline float-lg-right" ]
-                [ input [ class "form-control", type_ "text", placeholder "Search" ] [] ]
+                [ input [ class "form-control search-input", type_ "text", placeholder "Search" ] [] ]
             ]
         ]
 
@@ -165,30 +165,70 @@ metaInfo song =
 
 renderPlaylists : List Playlist -> Html Msg
 renderPlaylists playlists =
-    div [ class "collection" ] (List.map renderPlaylist playlists)
+    let
+        header =
+            h3 [ class "collection__title" ] [ text "Latest Music" ]
+    in
+        div [ class "collection" ] (header :: List.map renderPlaylist playlists)
 
 
 renderPlaylist : Playlist -> Html Msg
 renderPlaylist playlist =
     div [ class "collection__item", onClick <| ChangePage (PlaylistPage playlist) ]
-        [ img [ class "collection__item__image", src "/static/media/artwork.3eb76a6e.png" ] []
+        [ img [ class "collection__item__image", src playlist.coverImageUrl ] []
         , div [ class "collection__item__content" ]
             [ h4 [ class "collection__item__title" ] [ text playlist.title ]
             ]
         ]
 
 
-renderSongs : List Song -> Html Msg
-renderSongs songs =
-    div [ class "list" ] (List.map renderSong songs)
-
-
-renderSong : Song -> Html Msg
-renderSong song =
-    div [ class "list__item", onClick <| PlaySong song ]
-        [ img [ class "list__item__image", src song.cover ] []
-        , div [ class "list__item__content" ]
-            [ span [ class "list__item__title" ] [ text song.title ]
-            , span [ class "list__item__sub_title" ] [ metaInfo song ]
+renderPlaylistSongs : Playlist -> Maybe PlayingInfo -> Html Msg
+renderPlaylistSongs { title, songs, coverImageUrl } player =
+    div [ class "playlist" ]
+        [ div [ class "playlist__header" ]
+            [ img [ src coverImageUrl ] []
+            , div [ class "playlist__header__content" ]
+                [ h3 [ class "playlist__header__content__title" ] [ text title ]
+                , p [ class "playlist__header__content__info" ] [ text <| (toString (List.length songs)) ++ " tracks" ]
+                ]
+            ]
+        , table [ class "table table-hover table-striped table-playlist" ]
+            [ thead []
+                [ tr []
+                    [ th [] [ text "#" ]
+                    , th [] [ text "" ]
+                    , th [] [ text "Title" ]
+                    , th [] [ text "Artist" ]
+                    ]
+                ]
+            , tbody [] (List.indexedMap (renderSong player) songs)
             ]
         ]
+
+
+renderSong : Maybe PlayingInfo -> Int -> Song -> Html Msg
+renderSong player index song =
+    let
+        isCurrentSong =
+            case player of
+                Nothing ->
+                    False
+
+                Just playingInfo ->
+                    song.id == playingInfo.song.id
+
+        cmd =
+            if isCurrentSong then
+                Pause
+            else
+                PlaySong song
+    in
+        tr [ classList [ ( "current", isCurrentSong ) ] ]
+            [ td [ class "song__item", onClick cmd ] [ text (toString (index + 1)) ]
+            , td [] [ text "" ]
+            , td []
+                [ img [ class "song__cover", src song.cover ] []
+                , div [ class "song__title" ] [ text song.title ]
+                ]
+            , td [] [ text <| String.join ", " song.artists ]
+            ]

@@ -38,6 +38,7 @@ type alias Playlist =
     { id : Int
     , title : String
     , songs : List Song
+    , coverImageUrl : String
     }
 
 
