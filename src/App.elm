@@ -80,27 +80,7 @@ update msg model =
             ( { model | currentPage = page }, Cmd.none )
 
         PlaySong song ->
-            let
-                playingInfo =
-                    { song = song, duration = 0, currentTime = 0, downloadProgress = 0, state = Idle }
-
-                source =
-                    List.head song.downloadLinks
-
-                command =
-                    case source of
-                        Nothing ->
-                            Cmd.none
-
-                        Just link ->
-                            setSource link
-            in
-                ( { model
-                    | player = Just playingInfo
-                    , queue = addSongToQueue song model.queue
-                  }
-                , command
-                )
+            playSong song model
 
         AddSongToQueue song ->
             ( { model | queue = addSongToQueue song model.queue }, Cmd.none )
@@ -118,10 +98,10 @@ update msg model =
             ( model, play () )
 
         ItemEnded _ ->
-            update Next model
+            playNextSong model
 
         Next ->
-            ( model, Cmd.none )
+            playNextSong model
 
         Previous ->
             ( model, Cmd.none )
@@ -172,6 +152,41 @@ update msg model =
                 ( { model | player = player }, Cmd.none )
 
 
+playSong : Song -> Model -> ( Model, Cmd Msg )
+playSong song model =
+    let
+        playingInfo =
+            { song = song, duration = 0, currentTime = 0, downloadProgress = 0, state = Idle }
+
+        source =
+            List.head song.downloadLinks
+
+        command =
+            case source of
+                Nothing ->
+                    Cmd.none
+
+                Just link ->
+                    setSource link
+    in
+        ( { model
+            | player = Just playingInfo
+            , queue = addSongToQueue song model.queue
+          }
+        , command
+        )
+
+
+playNextSong : Model -> ( Model, Cmd Msg )
+playNextSong model =
+    case nextSongInQueue (Maybe.map .song model.player) model.queue of
+        Nothing ->
+            ( model, Cmd.none )
+
+        Just song ->
+            playSong song model
+
+
 addSongToQueue : Song -> Array Song -> Array Song
 addSongToQueue song queue =
     let
@@ -184,3 +199,35 @@ addSongToQueue song queue =
 
             Just _ ->
                 queue
+
+
+nextSongInQueue : Maybe Song -> Array Song -> Maybe Song
+nextSongInQueue currentSong queue =
+    case currentSong of
+        Nothing ->
+            Array.get 0 queue
+
+        Just song ->
+            let
+                indexFunction index item =
+                    if song.id == item.id then
+                        Just index
+                    else
+                        Nothing
+
+                filterFunction item =
+                    case item of
+                        Nothing ->
+                            False
+
+                        _ ->
+                            True
+
+                currentSongIndex =
+                    Array.indexedMap indexFunction queue
+                        |> Array.filter filterFunction
+                        |> Array.get 0
+                        |> Maybe.withDefault (Just 0)
+                        |> Maybe.withDefault 0
+            in
+                Array.get (currentSongIndex + 1) queue

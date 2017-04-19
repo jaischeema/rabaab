@@ -135,6 +135,10 @@ body {
   margin-bottom: 20px;
 }
 
+.playlist__header__content__title {
+  letter-spacing: 1.3px;
+}
+
 .playlist__header img {
   display: block;
   width: 150px;
@@ -237,17 +241,26 @@ body {
 .table-playlist tbody td {
   border-bottom: 1px solid #222428;
   vertical-align: middle;
-  padding: 10px 15px;
+  padding: 7px 15px;
 }
 
 .table-playlist tbody tr:hover {
   background-color: #222428;
 }
 
-.song__cover {
+.song__info {
+  display: flex;
+  align-items: center;
+}
+
+.song__info__cover {
   height: 36px;
   width: 36px;
   border-radius: 5px;
   float: left;
   margin-right: 10px;
+}
+
+.pointer {
+  cursor: pointer;
 }

@@ -56,7 +56,7 @@ renderQueue queue playingInfo =
 
 renderQueueSong : Song -> Html Msg
 renderQueueSong song =
-    a [ class "queue__list__item" ]
+    a [ class "queue__list__item pointer", onClick <| PlaySong song ]
         [ h5 [ class "queue__list__item__title" ] [ text song.title ]
         , p [ class "queue__list__item__subtitle" ] [ metaInfo song ]
         ]
@@ -119,13 +119,11 @@ renderPlayer data =
                 [ renderCurrentSongInfo data ]
             , div [ class "col-lg-6 player-controls" ]
                 [ div [ class "row" ]
-                    [ a [ class "col-xs-2 player-button previous-button" ]
+                    [ a [ class "col-xs-2 player-button previous-button", onClick Previous ]
                         [ i [ class "fa fa-fast-backward" ] [] ]
                     , a [ class "col-xs-2 player-button play-button", onClick playAction ]
                         [ i [ class <| "fa " ++ playbuttonClass ] [] ]
-                    , a [ class "col-xs-2 player-button stop-button" ]
-                        [ i [ class "fa fa-stop" ] [] ]
-                    , a [ class "col-xs-2 player-button next-button" ]
+                    , a [ class "col-xs-2 player-button next-button", onClick Next ]
                         [ i [ class "fa fa-fast-forward" ] [] ]
                     , a [ class "col-xs-2 player-button shuffle-button" ]
                         [ i [ class "fa fa-random" ] [] ]
@@ -196,9 +194,9 @@ renderPlaylistSongs { title, songs, coverImageUrl } player =
             [ thead []
                 [ tr []
                     [ th [] [ text "#" ]
-                    , th [] [ text "" ]
                     , th [] [ text "Title" ]
                     , th [] [ text "Artist" ]
+                    , th [] []
                     ]
                 ]
             , tbody [] (List.indexedMap (renderSong player) songs)
@@ -217,18 +215,25 @@ renderSong player index song =
                 Just playingInfo ->
                     song.id == playingInfo.song.id
 
-        cmd =
+        indexColumn =
             if isCurrentSong then
-                Pause
+                td [ class "playing__icon pointer" ] [ icon "fa-play-circle-o" Pause ]
             else
-                PlaySong song
+                td [ class "song__item", onClick (PlaySong song) ] [ text (toString (index + 1)) ]
     in
         tr [ classList [ ( "current", isCurrentSong ) ] ]
-            [ td [ class "song__item", onClick cmd ] [ text (toString (index + 1)) ]
-            , td [] [ text "" ]
-            , td []
-                [ img [ class "song__cover", src song.cover ] []
-                , div [ class "song__title" ] [ text song.title ]
+            [ indexColumn
+            , td [ onClick <| PlaySong song ]
+                [ div [ class "song__info pointer" ]
+                    [ img [ class "song__info__cover", src song.cover ] []
+                    , div [ class "song__info__title" ] [ text song.title ]
+                    ]
                 ]
             , td [] [ text <| String.join ", " song.artists ]
+            , td [ class "play__icon pointer" ] [ icon "fa-plus" (AddSongToQueue song) ]
             ]
+
+
+icon : String -> Msg -> Html Msg
+icon name msg =
+    i [ classList [ ( "fa", True ), ( name, True ) ], onClick msg ] []
