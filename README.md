@@ -9,7 +9,7 @@ $ elm-package install
 $ elm-app start
 ```
 
-# Deployment
+## Deployment
 
 ```
 $ elm-app build
