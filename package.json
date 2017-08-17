@@ -1,0 +1,12 @@
+{
+  "name": "rabaab",
+  "author": "Jais Cheema",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {},
+  "homepage": "https://music.jaischeema.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaischeema/triangular.git"
+  }
+}
