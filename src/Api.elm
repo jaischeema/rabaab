@@ -57,4 +57,4 @@ playlistsDecoder =
 
 playlistsRequest : Http.Request (List Playlist)
 playlistsRequest =
-    Http.get "http://kaato.apnavirsa.net/api/v1/playlists" playlistsDecoder
+    Http.get "https://kaatoapp.com/api/v1/playlists" playlistsDecoder
